@@ -7,6 +7,8 @@ import ProductPage from '../../pages/product-page/product-page';
 import SignInPage from '../../pages/sign-in-page/sign-in-page';
 import SignUpPage from '../../pages/sign-up-page/sign-up-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
+import PrivateRoute from '../private-route/private-route';
+import {AuthorizationStatus} from '../../services/api/const';
 
 function App() {
   return (
@@ -22,7 +24,11 @@ function App() {
         />
         <Route
           path={AppRoute.Favorites}
-          element={<FavoritesPage />}
+          element={
+            <PrivateRoute restrictedFor={AuthorizationStatus.NoAuth} redirectedTo={AppRoute.SignIn}>
+              <FavoritesPage />
+            </PrivateRoute>
+          }
         />
         <Route
           path={AppRoute.Product}
@@ -30,11 +36,19 @@ function App() {
         />
         <Route
           path={AppRoute.SignIn}
-          element={<SignInPage />}
+          element={
+            <PrivateRoute restrictedFor={AuthorizationStatus.Auth} redirectedTo={AppRoute.Root}>
+              <SignInPage />
+            </PrivateRoute>
+          }
         />
         <Route
           path={AppRoute.SignUp}
-          element={<SignUpPage />}
+          element={
+            <PrivateRoute restrictedFor={AuthorizationStatus.Auth} redirectedTo={AppRoute.Root}>
+              <SignUpPage />
+            </PrivateRoute>
+          }
         />
         <Route
           path="*"
