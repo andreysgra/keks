@@ -1,20 +1,15 @@
+import Logo from '../logo/logo';
+import {useLocation} from 'react-router-dom';
+import {AppRoute} from '../../const';
+
 function Header() {
+  const isRoot = useLocation().pathname === AppRoute.Root as string;
+
   return (
     <header className="header">
       <div className="container">
         <div className="header__inner">
-          <a
-            className="header__logo"
-            href="index.html"
-            aria-label="Переход на главную"
-          >
-            <img
-              src="img/svg/logo.svg"
-              width={170}
-              height={69}
-              alt="Кондитерская кекс"
-            />
-          </a>
+          <Logo isRoot={isRoot} />
           <div className="header__buttons">
             <div className="header__btn">
               <a
