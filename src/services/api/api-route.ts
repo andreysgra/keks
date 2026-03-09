@@ -1,3 +1,3 @@
 export enum ApiRoute {
-  Products = 'products'
+  Products = '/products'
 }
