@@ -1,3 +1,4 @@
 export enum StoreSlice {
-  Products = 'products'
+  Products = 'products',
+  SiteProcess = 'site-process'
 }

@@ -10,3 +10,5 @@ export enum AppRoute {
 export enum RouteParam {
   Id = ':id'
 }
+
+export const PRODUCTS_PER_LOAD = 6;
