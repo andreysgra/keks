@@ -5,11 +5,11 @@ import {Provider} from 'react-redux';
 import store from './store';
 import {fetchProducts} from './store/products/api-actions';
 
+store.dispatch(fetchProducts());
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-
-store.dispatch(fetchProducts());
 
 root.render(
   <React.StrictMode>
