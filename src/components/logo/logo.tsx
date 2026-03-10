@@ -6,7 +6,7 @@ type LogoProps = {
 }
 
 function Logo({isRoot}: LogoProps) {
-  const logoImage = <img src="img/svg/logo.svg" width={170} height={69} alt="Кондитерская кекс" />;
+  const logoImage = <img src="/img/svg/logo.svg" width={170} height={69} alt="Кондитерская кекс" />;
 
   return (
     isRoot ? (
