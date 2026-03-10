@@ -1,13 +1,21 @@
 type ShowMoreButtonProps = {
+  isShowed?: boolean;
   onClick: () => void;
 }
 
-function ShowMoreButton({onClick}: ShowMoreButtonProps) {
+function ShowMoreButton({isShowed, onClick}: ShowMoreButtonProps) {
+  const handleButtonClick = () => window.scrollTo({top: 0, behavior: 'smooth'});
+
   return (
     <div className="catalog__button-wrapper">
-      <button className="btn btn--second" type="button" onClick={onClick}>
+      {isShowed ? (
+        <button className="btn btn--second" type="button" onClick={onClick}>
         Показать еще
-      </button>
+        </button>) : (
+        <button className="btn btn--second" type="button" onClick={handleButtonClick}>
+          В начало
+        </button>
+      )}
     </div>
   );
 }
