@@ -6,3 +6,7 @@ export enum AppRoute {
   SignIn = '/sign-in',
   SignUp = '/sign-up'
 }
+
+export enum RouteParam {
+  Id = ':id'
+}
