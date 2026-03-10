@@ -7,3 +7,10 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN'
 }
+
+export enum RequestStatus {
+  Error = 'Error',
+  Idle = 'Idle',
+  Pending = 'Pending',
+  Success = 'Success'
+}
