@@ -1,8 +1,8 @@
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {getIsProductsLoading} from '../../store/products/selectors';
 import Loader from '../loader/loader';
-import CatalogCard from '../catalog-card/catalog-card';
 import {TProducts} from '../../types/product';
+import ProductCard from '../product-card/product-card';
 
 type CatalogListProps = {
   products: TProducts;
@@ -17,7 +17,11 @@ function CatalogList({products}: CatalogListProps) {
 
   return (
     <ul className="catalog__list">
-      {products.map((product) => <CatalogCard key={product.id} product={product} />)}
+      {products.map((product) => (
+        <li className="catalog__item" key={product.id}>
+          <ProductCard product={product} isBig />
+        </li>
+      ))}
     </ul>
   );
 }
