@@ -8,6 +8,7 @@ import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {setProductsCount} from '../../store/site-process/slice';
 import {PRODUCTS_PER_LOAD} from '../../const';
+import BackLink from '../../components/back-link/back-link';
 
 function CatalogPage() {
   const products = useAppSelector(getProducts);
@@ -25,21 +26,7 @@ function CatalogPage() {
       <Header />
       <main>
         <h1 className="visually-hidden">Каталог товаров</h1>
-        <div className="back-link">
-          <div className="container">
-            <a className="back-link__link" href="#">
-              Назад
-              <svg
-                className="back-link__icon"
-                width={30}
-                height={16}
-                aria-hidden="true"
-              >
-                <use xlinkHref="#icon-arrow-left" />
-              </svg>
-            </a>
-          </div>
-        </div>
+        <BackLink />
         <div className="catalog-filter">
           <div className="container">
             <div className="catalog-filter__first-level">
