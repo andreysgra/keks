@@ -9,3 +9,10 @@ export const shuffleArray = <T>(array: T[]): T[] => {
 
   return shuffled;
 };
+
+export const getDate = (date: string): string =>
+  new Date(date).toISOString().split('T')[0];
+
+export const getTime = (date: string): string =>
+  new Date(date).toLocaleTimeString('ru-RU', {hour: '2-digit', minute:'2-digit'})
+    .replace(':', '.');
