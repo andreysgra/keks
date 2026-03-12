@@ -63,7 +63,9 @@ function CatalogPage() {
             <h2 className="visually-hidden">Каталог</h2>
             <div className="catalog__wrapper">
               <CatalogList products={products.slice(0, displayedProducts)} />
-              <ShowMoreButton onClick={handleShowMoreButtonClick} isShowed={isShowMoreButtonShowed} />
+              <div className="catalog__button-wrapper">
+                <ShowMoreButton onClick={handleShowMoreButtonClick} isShowed={isShowMoreButtonShowed} />
+              </div>
             </div>
           </div>
         </section>
