@@ -4,6 +4,7 @@ export enum AppRoute {
   Root = '/',
   Catalog = '/catalog',
   Favorites = '/favorites',
+  NotFound = '/404',
   Product = '/product/:id',
   SignIn = '/sign-in',
   SignUp = '/sign-up'
