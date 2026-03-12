@@ -1,22 +1,31 @@
+import classNames from 'classnames';
+
 type ShowMoreButtonProps = {
   isShowed?: boolean;
+  isComments?: boolean;
   onClick: () => void;
 }
 
-function ShowMoreButton({isShowed, onClick}: ShowMoreButtonProps) {
+function ShowMoreButton({isShowed, isComments, onClick}: ShowMoreButtonProps) {
   const handleButtonClick = () => window.scrollTo({top: 0, behavior: 'smooth'});
 
   return (
-    <div className="catalog__button-wrapper">
-      {isShowed ? (
-        <button className="btn btn--second" type="button" onClick={onClick}>
+    isShowed ? (
+      <button
+        className={classNames('btn btn--second', {'comments__button': isComments})}
+        type="button"
+        onClick={onClick}
+      >
         Показать еще
-        </button>) : (
-        <button className="btn btn--second" type="button" onClick={handleButtonClick}>
+      </button>) : (
+      <button
+        className={classNames('btn btn--second', {'comments__button': isComments})}
+        type="button"
+        onClick={handleButtonClick}
+      >
           В начало
-        </button>
-      )}
-    </div>
+      </button>
+    )
   );
 }
 

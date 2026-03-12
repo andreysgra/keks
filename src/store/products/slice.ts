@@ -3,10 +3,11 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {StoreSlice} from '../const';
 import {TProducts} from '../../types/product';
 import {fetchProducts} from './api-actions';
+import {RequestStatus} from '../../services/api/const';
 
 const initialState: TProductsState = {
   products: [],
-  isProductsLoading: false
+  loadingStatus: RequestStatus.Idle
 };
 
 const productsSlice = createSlice({
@@ -17,13 +18,14 @@ const productsSlice = createSlice({
     builder
       .addCase(fetchProducts.fulfilled, (state, action: PayloadAction<TProducts>) => {
         state.products = action.payload;
-        state.isProductsLoading = false;
+        state.loadingStatus = RequestStatus.Success;
       })
       .addCase(fetchProducts.pending, (state) => {
-        state.isProductsLoading = true;
+        state.loadingStatus = RequestStatus.Pending;
       })
       .addCase(fetchProducts.rejected, (state) => {
-        state.isProductsLoading = false;
+        state.products = [];
+        state.loadingStatus = RequestStatus.Error;
       });
   }
 });

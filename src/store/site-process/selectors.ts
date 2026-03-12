@@ -1,6 +1,10 @@
 import {State} from '../../types/state';
 import {StoreSlice} from '../const';
 
-export const getProductsCount = (state: State) => state[StoreSlice.SiteProcess].productsCount;
+const storeSlice = StoreSlice.SiteProcess;
 
-export const getShopType = (state: State) => state[StoreSlice.SiteProcess].shopType;
+export const getProductsCount = (state: State) => state[storeSlice].productsCount;
+
+export const getReviewsCount = (state: State) => state[storeSlice].reviewsCount;
+
+export const getShopType = (state: State) => state[storeSlice].shopType;

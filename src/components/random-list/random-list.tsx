@@ -1,5 +1,5 @@
 import {useAppSelector} from '../../hooks/use-app-selector';
-import {getProducts} from '../../store/products/selectors';
+import {getIsProductsFailed, getProducts} from '../../store/products/selectors';
 import {shuffleArray} from '../../utils/utils';
 import {RANDOM_PRODUCTS_COUNT} from '../../const';
 import ProductCard from '../product-card/product-card';
@@ -7,6 +7,11 @@ import ProductCardAll from '../product-card-all/product-card-all';
 
 function RandomList() {
   const products = useAppSelector(getProducts);
+  const isProductsFailed = useAppSelector(getIsProductsFailed);
+
+  if (isProductsFailed) {
+    return ;
+  }
 
   const randomProducts = shuffleArray(products).slice(0, RANDOM_PRODUCTS_COUNT);
 

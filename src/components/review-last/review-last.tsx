@@ -1,13 +1,12 @@
 import {useAppSelector} from '../../hooks/use-app-selector';
-import {getLoadingStatus, getReviewsLast} from '../../store/reviews/selectors';
-import {RequestStatus} from '../../services/api/const';
+import {getIsReviewLastFailed, getReviewsLast} from '../../store/reviews/selectors';
 import Review from '../review/review';
 
 function ReviewLast() {
   const review = useAppSelector(getReviewsLast);
-  const loadingStatus = useAppSelector(getLoadingStatus);
+  const isReviewLastFailed = useAppSelector(getIsReviewLastFailed);
 
-  if (loadingStatus === RequestStatus.Error || !review) {
+  if (isReviewLastFailed || !review) {
     return;
   }
 

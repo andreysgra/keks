@@ -2,12 +2,12 @@ import {State} from '../../types/state';
 import {StoreSlice} from '../const';
 import {RequestStatus} from '../../services/api/const';
 
-const storeSlice = StoreSlice.Products;
+const storeSlice = StoreSlice.Product;
 
-export const getProducts = (state: State) => state[storeSlice].products;
+export const getProduct = (state: State) => state[storeSlice].product;
 
-export const getIsProductsLoading = (state: State) =>
+export const getIsProductLoading = (state: State) =>
   state[storeSlice].loadingStatus === RequestStatus.Pending;
 
-export const getIsProductsFailed = (state: State) =>
+export const getIsProductFailed = (state: State) =>
   state[storeSlice].loadingStatus === RequestStatus.Error;
