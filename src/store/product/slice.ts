@@ -7,7 +7,7 @@ import {RequestStatus} from '../../services/api/const';
 
 const initialState: TProductState = {
   product: null,
-  loadingStatus: RequestStatus.Idle,
+  loadingStatus: RequestStatus.Idle
 };
 
 const productSlice = createSlice({

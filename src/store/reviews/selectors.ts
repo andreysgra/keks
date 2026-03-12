@@ -1,6 +1,13 @@
 import {State} from '../../types/state';
 import {StoreSlice} from '../const';
+import {RequestStatus} from '../../services/api/const';
 
-export const getReviewsLast = (state: State) => state[StoreSlice.Reviews].reviewLast;
+const storeSlice = StoreSlice.Reviews;
 
-export const getLoadingStatus = (state: State) => state[StoreSlice.Reviews].loadingStatus;
+export const getReviewsLast = (state: State) => state[storeSlice].reviewLast;
+
+export const getIsReviewLastLoading = (state: State) =>
+  state[storeSlice].loadingStatus === RequestStatus.Pending;
+
+export const getIsReviewLastFailed = (state: State) =>
+  state[storeSlice].loadingStatus === RequestStatus.Error;

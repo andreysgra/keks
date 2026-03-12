@@ -9,5 +9,5 @@ export const getProduct = (state: State) => state[storeSlice].product;
 export const getIsProductLoading = (state: State) =>
   state[storeSlice].loadingStatus === RequestStatus.Pending;
 
-export const getIsProductLoadingFailed = (state: State) =>
+export const getIsProductFailed = (state: State) =>
   state[storeSlice].loadingStatus === RequestStatus.Error;
