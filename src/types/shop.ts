@@ -7,9 +7,7 @@ export type TShop = {
   markerUrl: string;
 }
 
-export type TShopLocation = {
-  [key in string]: TShop;
-}
+export type TShopLocation = Record<string, TShop>
 
 export type TShopPoint = Pick<TShop, 'location' | 'markerUrl'>
 

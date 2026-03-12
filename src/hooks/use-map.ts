@@ -10,7 +10,7 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, shopPoint: TShopPo
   const {location: [latitude, longitude]} = shopPoint;
 
   useEffect(() => {
-    if (mapRef.current !== null && !isRenderedRef.current) {
+    if (mapRef?.current && !isRenderedRef.current) {
       const mapInstance = new Map(mapRef.current, {
         center: {
           lat: latitude,
