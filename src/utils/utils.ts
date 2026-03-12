@@ -16,3 +16,6 @@ export const getDate = (date: string): string =>
 export const getTime = (date: string): string =>
   new Date(date).toLocaleTimeString('ru-RU', {hour: '2-digit', minute:'2-digit'})
     .replace(':', '.');
+
+export const getFormattedNumber = (digits: number): string =>
+  new Intl.NumberFormat('ru-RU').format(digits);
