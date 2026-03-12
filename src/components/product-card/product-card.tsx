@@ -2,6 +2,7 @@ import {Link} from 'react-router-dom';
 import classNames from 'classnames';
 import {TProduct} from '../../types/product';
 import {AppRoute, RouteParam} from '../../const';
+import {getFormattedNumber} from '../../utils/utils';
 
 type ProductCardProps = {
   product: TProduct;
@@ -47,7 +48,7 @@ function ProductCard({product, isBig}: ProductCardProps) {
           <use xlinkHref="#icon-like" />
         </svg>
       </button>
-      {isBig && <span className="card-item__price">{price} p</span>}
+      {isBig && <span className="card-item__price">{getFormattedNumber(price)} p</span>}
       <Link className="card-item__link" to={link}>
         <h3 className="card-item__title">
           <span>{title}</span>
