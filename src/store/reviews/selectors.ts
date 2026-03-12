@@ -11,3 +11,11 @@ export const getIsReviewLastLoading = (state: State) =>
 
 export const getIsReviewLastFailed = (state: State) =>
   state[storeSlice].loadingStatus === RequestStatus.Error;
+
+export const getReviews = (state: State) => state[storeSlice].reviews;
+
+export const getIsReviewsLoading = (state: State) =>
+  state[storeSlice].loadingStatus === RequestStatus.Pending;
+
+export const getIsReviewsFailed = (state: State) =>
+  state[storeSlice].loadingStatus === RequestStatus.Error;
