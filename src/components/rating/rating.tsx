@@ -3,13 +3,15 @@ import classNames from 'classnames';
 
 type RatingProps = {
   rating: number;
+  reviewCount?: number;
+  isBig?: boolean;
 }
 
-function Rating({rating}: RatingProps) {
+function Rating({rating, reviewCount, isBig}: RatingProps) {
   const roundedRating = Math.round(rating);
 
   return (
-    <div className="star-rating">
+    <div className={classNames('star-rating', {'star-rating--big': isBig})}>
       {Array.from({length: STARS_COUNT}, (_, i) =>
         (
           <svg key={i}
@@ -22,6 +24,7 @@ function Rating({rating}: RatingProps) {
           </svg>
         )
       )}
+      {reviewCount && <span className="star-rating__count">{reviewCount}</span>}
     </div>
   );
 }
