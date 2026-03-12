@@ -50,6 +50,8 @@ export const MapIcon = {
 
 export const PRODUCTS_PER_LOAD = 6;
 
+export const REVIEWS_PER_LOAD = 2;
+
 export const RANDOM_PRODUCTS_COUNT = 3;
 
 export const STARS_COUNT = 5;
