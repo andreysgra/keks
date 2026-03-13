@@ -14,6 +14,8 @@ export const getIsReviewLastFailed = (state: State) =>
 
 export const getReviews = (state: State) => state[storeSlice].reviews;
 
+export const getHasReviews = (state: State) => state[storeSlice].reviews.length > 0;
+
 export const getIsReviewsLoading = (state: State) =>
   state[storeSlice].loadingStatus === RequestStatus.Pending;
 
