@@ -1,6 +1,6 @@
 import {TReview} from '../../types/review';
 import {useAppSelector} from '../../hooks/use-app-selector';
-import {getIsReviewsLoading, getReviews} from '../../store/reviews/selectors';
+import {getIsReviewsFailed, getIsReviewsLoading, getReviews} from '../../store/reviews/selectors';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {useEffect} from 'react';
 import {fetchReviews} from '../../store/reviews/api-actions';
@@ -10,6 +10,7 @@ import ShowMoreButton from '../show-more-button/show-more-button';
 import {getReviewsCount} from '../../store/site-process/selectors';
 import {setReviewsCount} from '../../store/site-process/slice';
 import {REVIEWS_PER_LOAD} from '../../const';
+import ErrorReviews from '../error-reviews/error-reviews';
 
 type ReviewListProps = {
   id: TReview['id'];
@@ -18,6 +19,7 @@ type ReviewListProps = {
 function ReviewList({id}: ReviewListProps) {
   const reviews = useAppSelector(getReviews);
   const isReviewsLoading = useAppSelector(getIsReviewsLoading);
+  const isReviewsFailed = useAppSelector(getIsReviewsFailed);
   const displayedComments = useAppSelector(getReviewsCount);
 
   const dispatch = useAppDispatch();
@@ -32,6 +34,10 @@ function ReviewList({id}: ReviewListProps) {
 
   if (isReviewsLoading) {
     return <Loader />;
+  }
+
+  if (isReviewsFailed) {
+    return <ErrorReviews id={id} />;
   }
 
   const handleShowMoreButtonClick = () =>
