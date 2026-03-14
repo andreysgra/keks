@@ -9,6 +9,8 @@ import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {useEffect} from 'react';
 import {fetchReviews} from '../../store/reviews/api-actions';
 import ReviewsFilter from '../../components/reviews-filter/reviews-filter';
+import {getFilterRating} from '../../store/site-process/selectors';
+import {FilterReviewsByRating} from '../../utils/utils';
 
 type CommentsProps = {
   id: TReview['id'];
@@ -19,12 +21,16 @@ function ReviewsContent({id}: CommentsProps) {
   const isReviewsLoading = useAppSelector(getIsReviewsLoading);
   const isReviewsFailed = useAppSelector(getIsReviewsFailed);
   const hasReviews = useAppSelector(getHasReviews);
+  const activeFilterRating = useAppSelector(getFilterRating);
+
+  const filteredReviews = FilterReviewsByRating[activeFilterRating](reviews);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchReviews(id));
   }, [id, dispatch]);
+
   if (isReviewsLoading) {
     return <Loader />;
   }
@@ -42,7 +48,7 @@ function ReviewsContent({id}: CommentsProps) {
       <ReviewsFilter />
       <section className="comments">
         <h2 className="visually-hidden">Список комментариев</h2>
-        <ReviewList reviews={reviews} />
+        <ReviewList reviews={filteredReviews} />
       </section>
     </>
   );
