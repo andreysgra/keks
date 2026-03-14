@@ -6,6 +6,6 @@ export type TSiteProcessState = {
   productsCount: number;
   reviewsCount: number;
   shopType: TShopType;
-  filterRating: TFilterOption;
+  reviewsFilterOption: TFilterOption;
   reviewsSortOption: TSortOption;
 }

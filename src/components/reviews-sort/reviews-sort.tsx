@@ -24,7 +24,7 @@ function ReviewsSort({activeSort, onClick}: ReviewsSortProps) {
             type="button"
             aria-label={title}
             onClick={handleButtonClick}
-            id={option}
+            value={option}
           >
             <svg
               className="filter-sort__sort-icon"

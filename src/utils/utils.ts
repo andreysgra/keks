@@ -1,6 +1,7 @@
 import {TFilterReviews} from '../types/filter';
-import {TReviews} from '../types/review';
+import {TReview, TReviews} from '../types/review';
 import {RATING_LOW} from '../const';
+import {TSortReviews} from '../types/sorting';
 
 export const shuffleArray = <T>(array: T[]): T[] => {
   const shuffled = [...array];
@@ -28,4 +29,9 @@ export const FilterReviewsByRating: TFilterReviews = {
   All: (reviews: TReviews) => reviews,
   High: (reviews: TReviews) => reviews.filter((review) => review.rating > RATING_LOW),
   Low: (reviews: TReviews) => reviews.filter((review) => review.rating <= RATING_LOW),
+};
+
+export const SortReviewsByDate: TSortReviews = {
+  Ascending: (a: TReview, b: TReview) => Date.parse(b.isoDate) - Date.parse(a.isoDate),
+  Descending: (a: TReview, b: TReview) => Date.parse(a.isoDate) - Date.parse(b.isoDate)
 };
