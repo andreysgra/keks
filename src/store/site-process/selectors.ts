@@ -10,3 +10,5 @@ export const getReviewsCount = (state: State) => state[storeSlice].reviewsCount;
 export const getShopType = (state: State) => state[storeSlice].shopType;
 
 export const getFilterRating = (state: State) => state[storeSlice].filterRating;
+
+export const getReviewsSortOption = (state: State) => state[storeSlice].reviewsSortOption;
