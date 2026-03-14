@@ -20,6 +20,11 @@ export enum ReviewsRating {
   Low = 'Низкий'
 }
 
+export enum ReviewsSortType {
+  Ascending = 'сортировка по возрастанию',
+  Descending = 'сортировка по убыванию'
+}
+
 export const Shops: TShopLocation = {
   FIRST_SHOP: {
     name: 'Кондитерская 1',
