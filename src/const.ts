@@ -14,6 +14,12 @@ export enum RouteParam {
   Id = ':id'
 }
 
+export enum ReviewsRating {
+  All = 'Любой',
+  High = 'Высокий',
+  Low = 'Низкий'
+}
+
 export const Shops: TShopLocation = {
   FIRST_SHOP: {
     name: 'Кондитерская 1',
@@ -57,3 +63,5 @@ export const RANDOM_PRODUCTS_COUNT = 3;
 export const STARS_COUNT = 5;
 
 export const DESCRIPTION_MAX_LENGTH = 140;
+
+export const RATING_LOW = 3;
