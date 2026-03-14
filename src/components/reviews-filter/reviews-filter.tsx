@@ -1,4 +1,21 @@
+import FilterList from '../filter-list/filter-list';
+import {ReviewsRating} from '../../const';
+import {useAppSelector} from '../../hooks/use-app-selector';
+import {getFilterRating} from '../../store/site-process/selectors';
+import {setFilterRating} from '../../store/site-process/slice';
+import {ChangeEvent} from 'react';
+import {TFilterOption} from '../../types/filter';
+import {useAppDispatch} from '../../hooks/use-app-dispatch';
+
 function ReviewsFilter() {
+  const activeFilterRating = useAppSelector(getFilterRating);
+
+  const dispatch = useAppDispatch();
+
+  const handleFilterListChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    dispatch(setFilterRating(evt.target.value as TFilterOption));
+  };
+
   return (
     <div className="filter-sort">
       <div className="container">
@@ -7,7 +24,7 @@ function ReviewsFilter() {
             <h3 className="filter-sort__filter-title">Показать с рейтингом</h3>
             <div className="filter-sort__filter">
               <button className="filter-sort__filter-btn" type="button">
-                Любой
+                {ReviewsRating[activeFilterRating]}
                 <svg
                   className="filter-sort__filter-icon"
                   width={14}
@@ -17,46 +34,7 @@ function ReviewsFilter() {
                   <use xlinkHref="#icon-polygon"/>
                 </svg>
               </button>
-              <ul className="filter-sort__filter-list">
-                <li className="filter-sort__filter-item">
-                  <div className="custom-toggle custom-toggle--sorting">
-                    <input
-                      type="radio"
-                      id="review-sort-1"
-                      name="review-sort"
-                      defaultChecked
-                    />
-                    <label
-                      className="custom-toggle__label"
-                      htmlFor="review-sort-1"
-                    >
-                      Любой
-                    </label>
-                  </div>
-                </li>
-                <li className="filter-sort__filter-item">
-                  <div className="custom-toggle custom-toggle--sorting">
-                    <input type="radio" id="review-sort-2" name="review-sort"/>
-                    <label
-                      className="custom-toggle__label"
-                      htmlFor="review-sort-2"
-                    >
-                      Высокий
-                    </label>
-                  </div>
-                </li>
-                <li className="filter-sort__filter-item">
-                  <div className="custom-toggle custom-toggle--sorting">
-                    <input type="radio" id="review-sort-3" name="review-sort"/>
-                    <label
-                      className="custom-toggle__label"
-                      htmlFor="review-sort-3"
-                    >
-                      Низкий
-                    </label>
-                  </div>
-                </li>
-              </ul>
+              {<FilterList activeFilter={activeFilterRating} onChange={handleFilterListChange} />}
             </div>
           </div>
           <div className="filter-sort__sort-wrap">
