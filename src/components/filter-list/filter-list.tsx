@@ -19,7 +19,7 @@ function FilterList({activeFilter, onChange}: FilterList) {
               type="radio"
               id={`review-sort-${index}`}
               name="review-sort"
-              defaultChecked={activeFilter === option}
+              checked={activeFilter === option}
               onChange={handleRadioChange}
               value={option}
             />
