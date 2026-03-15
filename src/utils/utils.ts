@@ -1,3 +1,8 @@
+import {TFilterReviews} from '../types/filter';
+import {TReview, TReviews} from '../types/review';
+import {RATING_LOW} from '../const';
+import {TSortReviews} from '../types/sorting';
+
 export const shuffleArray = <T>(array: T[]): T[] => {
   const shuffled = [...array];
 
@@ -11,7 +16,7 @@ export const shuffleArray = <T>(array: T[]): T[] => {
 };
 
 export const getDate = (date: string): string =>
-  new Date(date).toISOString().split('T')[0];
+  new Date(date).toLocaleDateString('en-CA');
 
 export const getTime = (date: string): string =>
   new Date(date).toLocaleTimeString('ru-RU', {hour: '2-digit', minute:'2-digit'})
@@ -19,3 +24,14 @@ export const getTime = (date: string): string =>
 
 export const getFormattedNumber = (digits: number): string =>
   new Intl.NumberFormat('ru-RU').format(digits);
+
+export const FilterReviewsByRating: TFilterReviews = {
+  All: (reviews: TReviews) => reviews,
+  High: (reviews: TReviews) => reviews.filter((review) => review.rating > RATING_LOW),
+  Low: (reviews: TReviews) => reviews.filter((review) => review.rating <= RATING_LOW),
+};
+
+export const SortReviewsByDate: TSortReviews = {
+  Ascending: (a: TReview, b: TReview) => Date.parse(a.isoDate) - Date.parse(b.isoDate),
+  Descending: (a: TReview, b: TReview) => Date.parse(b.isoDate) - Date.parse(a.isoDate)
+};

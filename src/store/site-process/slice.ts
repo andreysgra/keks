@@ -3,11 +3,15 @@ import {REVIEWS_PER_LOAD, PRODUCTS_PER_LOAD, Shops} from '../../const';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {StoreSlice} from '../const';
 import {TShopType} from '../../types/shop';
+import {TFilterOption} from '../../types/filter';
+import {TSortOption} from '../../types/sorting';
 
 const initialState: TSiteProcessState = {
   productsCount: PRODUCTS_PER_LOAD,
   reviewsCount: REVIEWS_PER_LOAD,
-  shopType: Object.keys(Shops)[0]
+  shopType: Object.keys(Shops)[0],
+  reviewsFilterOption: 'All',
+  reviewsSortOption: 'Ascending'
 };
 
 const siteProcessSlice = createSlice({
@@ -22,10 +26,22 @@ const siteProcessSlice = createSlice({
     },
     setShopType: (state, action: PayloadAction<TShopType>) => {
       state.shopType = action.payload;
+    },
+    setReviewsFilterOption: (state, action: PayloadAction<TFilterOption>) => {
+      state.reviewsFilterOption = action.payload;
+    },
+    setReviewsSortOption: (state, action: PayloadAction<TSortOption>) => {
+      state.reviewsSortOption = action.payload;
     }
   }
 });
 
-export const {setProductsCount, setReviewsCount, setShopType} = siteProcessSlice.actions;
+export const {
+  setProductsCount,
+  setReviewsCount,
+  setShopType,
+  setReviewsFilterOption,
+  setReviewsSortOption
+} = siteProcessSlice.actions;
 
 export default siteProcessSlice;
