@@ -27,14 +27,17 @@ function ReviewList({reviews}: ReviewListProps) {
   const isShowMoreButtonShowed = reviews.length > displayedComments;
 
   return (
-    <div className="container">
-      <div className="comments__wrapper">
-        {reviews.slice(0, displayedComments).map((review) => <Review key={review.id} review={review} />)}
+    <section className="comments">
+      <h2 className="visually-hidden">Список комментариев</h2>
+      <div className="container">
+        <div className="comments__wrapper">
+          {reviews.slice(0, displayedComments).map((review) => <Review key={review.id} review={review}/>)}
+        </div>
+        <div className="comments__show-more">
+          <ShowMoreButton onClick={handleShowMoreButtonClick} isComments isShowed={isShowMoreButtonShowed}/>
+        </div>
       </div>
-      <div className="comments__show-more">
-        <ShowMoreButton onClick={handleShowMoreButtonClick} isComments isShowed={isShowMoreButtonShowed} />
-      </div>
-    </div>
+    </section>
   );
 }
 

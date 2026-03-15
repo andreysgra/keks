@@ -10,6 +10,7 @@ import {useEffect} from 'react';
 import {fetchReviews} from '../../store/reviews/api-actions';
 import ReviewsFilter from '../../components/reviews-filter/reviews-filter';
 import {getFilteredReviews} from '../../store/site-process/selectors';
+import NoFilteredReviews from '../no-filtered-reviews/no-filtered-reviews';
 
 type CommentsProps = {
   id: TReview['id'];
@@ -43,10 +44,7 @@ function ReviewsContent({id}: CommentsProps) {
   return (
     <>
       <ReviewsFilter />
-      <section className="comments">
-        <h2 className="visually-hidden">Список комментариев</h2>
-        <ReviewList reviews={reviews} />
-      </section>
+      {reviews.length > 0 ? <ReviewList reviews={reviews} /> : <NoFilteredReviews />}
     </>
   );
 }
