@@ -25,6 +25,20 @@ export enum ReviewsSortType {
   Descending = 'сортировка по убыванию'
 }
 
+export const CategoryTypeMap = {
+  ['chocolate']: 'Шоколадный',
+  ['vanilla']: 'Ваниль',
+  ['vegetarian']: 'Вегетарианский',
+  ['honey-cake']: 'Медовый',
+  ['lemon']: 'Лимонный',
+  ['new-york']: 'Нью-Йорк',
+  ['tart']: 'Тарт',
+  ['funnel-cake']: 'Муравейник',
+  ['basket-cake']: 'Корзинка',
+  ['chocolate-muffin']: 'Шоколадный маффин',
+  ['brand-muffin']: 'Фирменный маффин'
+} as Readonly<Record<string, string>>;
+
 export const Shops: TShopLocation = {
   FIRST_SHOP: {
     name: 'Кондитерская 1',
