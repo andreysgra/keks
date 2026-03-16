@@ -4,4 +4,6 @@ import {RequestStatus} from '../../services/api/const';
 export type TCategoriesState = {
   categories: TCategories;
   loadingStatus: RequestStatus;
+  activeCategory: string | null;
+  activeCategoryTypes: string[];
 }

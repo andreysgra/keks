@@ -11,3 +11,7 @@ export const getIsCategoriesLoading = (state: State) =>
 
 export const getIsCategoriesFailed = (state: State) =>
   state[storeSlice].loadingStatus === RequestStatus.Error;
+
+export const getActiveCategory = (state: State) => state[storeSlice].activeCategory;
+
+export const getActiveCategoryTypes = (state: State)=> state[storeSlice].activeCategoryTypes;

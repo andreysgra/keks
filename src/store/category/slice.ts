@@ -7,13 +7,22 @@ import {TCategories} from '../../types/category';
 
 const initialState: TCategoriesState = {
   categories: [],
-  loadingStatus: RequestStatus.Idle
+  loadingStatus: RequestStatus.Idle,
+  activeCategory: null,
+  activeCategoryTypes: []
 };
 
 const categoriesSlice = createSlice({
   name: StoreSlice.Products,
   initialState,
-  reducers: {},
+  reducers: {
+    setActiveCategory: (state, action: PayloadAction<string | null>) => {
+      state.activeCategory = action.payload;
+    },
+    setActiveCategoryTypes: (state, action: PayloadAction<string[]>) => {
+      state.activeCategoryTypes = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCategories.fulfilled, (state, action: PayloadAction<TCategories>) => {
@@ -29,5 +38,7 @@ const categoriesSlice = createSlice({
       });
   }
 });
+
+export const {setActiveCategory, setActiveCategoryTypes} = categoriesSlice.actions;
 
 export default categoriesSlice;
