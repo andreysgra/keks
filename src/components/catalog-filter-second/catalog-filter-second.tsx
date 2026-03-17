@@ -1,4 +1,4 @@
-import {CategoryTypeMap} from '../../const';
+import {ProductTypeName} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {getActiveCategoryTypes} from '../../store/category/selectors';
 
@@ -24,7 +24,7 @@ function CatalogFilterSecond() {
                 className="custom-toggle__label"
                 htmlFor={`catalog-second-level-id-${index}`}
               >
-                {CategoryTypeMap[type]}
+                {ProductTypeName[type]}
               </label>
             </div>
           </li>

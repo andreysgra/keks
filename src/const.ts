@@ -33,25 +33,39 @@ export enum ProductCategory {
   Shortbread = 'shortbread'
 }
 
-export const CategoryName = {
+export enum ProductType {
+  Chocolate = 'chocolate',
+  Vanilla = 'vanilla',
+  Vegetarian = 'vegetarian',
+  HoneyCake = 'honey-cake',
+  Lemon = 'lemon',
+  NewYork = 'new-york',
+  Tart = 'tart',
+  FunnelCake = 'funnel-cake',
+  BasketCake = 'basket-cake',
+  ChocolateMuffin = 'chocolate-muffin',
+  BrandMuffin = 'brand-muffin'
+}
+
+export const ProductCategoryName = {
   [ProductCategory.Bisque]: 'Бисквит',
   [ProductCategory.Cheesecake]: 'Чизкейк',
   [ProductCategory.Shortbread]: 'Песочное',
   [ProductCategory.Dessert]: 'Десерт'
 } as Readonly<Record<string, string>>;
 
-export const CategoryTypeMap = {
-  ['chocolate']: 'Шоколадный',
-  ['vanilla']: 'Ваниль',
-  ['vegetarian']: 'Вегетарианский',
-  ['honey-cake']: 'Медовый',
-  ['lemon']: 'Лимонный',
-  ['new-york']: 'Нью-Йорк',
-  ['tart']: 'Тарт',
-  ['funnel-cake']: 'Муравейник',
-  ['basket-cake']: 'Корзинка',
-  ['chocolate-muffin']: 'Шоколадный маффин',
-  ['brand-muffin']: 'Фирменный маффин'
+export const ProductTypeName = {
+  [ProductType.Chocolate]: 'Шоколадный',
+  [ProductType.Vanilla]: 'Ваниль',
+  [ProductType.Vegetarian]: 'Вегетарианский',
+  [ProductType.HoneyCake]: 'Медовый',
+  [ProductType.Lemon]: 'Лимонный',
+  [ProductType.NewYork]: 'Нью-Йорк',
+  [ProductType.Tart]: 'Тарт',
+  [ProductType.FunnelCake]: 'Муравейник',
+  [ProductType.BasketCake]: 'Корзинка',
+  [ProductType.ChocolateMuffin]: 'Шоколадный маффин',
+  [ProductType.BrandMuffin]: 'Фирменный маффин'
 } as Readonly<Record<string, string>>;
 
 export const Shops: TShopLocation = {

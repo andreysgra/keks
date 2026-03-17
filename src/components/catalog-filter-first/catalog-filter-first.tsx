@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import {CategoryName} from '../../const';
+import {ProductCategoryName} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {getActiveCategory, getCategories} from '../../store/category/selectors';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
@@ -42,7 +42,7 @@ function CatalogFilterFirst() {
               value={category}
               onClick={handleButtonClick}
             >
-              {CategoryName[category]}
+              {ProductCategoryName[category]}
             </button>
           </li>
         ))}
