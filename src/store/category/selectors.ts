@@ -18,7 +18,7 @@ export const getIsCategoriesFailed = (state: State) =>
 
 export const getActiveCategory = (state: State) => state[storeSlice].activeCategory;
 
-export const getActiveCategoryTypes = (state: State)=> state[storeSlice].activeCategoryTypes;
+export const getActiveTypes = (state: State)=> state[storeSlice].activeTypes;
 
 export const getFilteredProducts = createSelector(
   [getProducts, getActiveCategory],

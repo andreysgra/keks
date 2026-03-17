@@ -8,5 +8,5 @@ export type TCategoriesState = {
   categories: TCategories;
   loadingStatus: RequestStatus;
   activeCategory: TProductCategory;
-  activeCategoryTypes: string[];
+  activeTypes: string[];
 }

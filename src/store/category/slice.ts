@@ -9,7 +9,7 @@ const initialState: TCategoriesState = {
   categories: [],
   loadingStatus: RequestStatus.Idle,
   activeCategory:  null,
-  activeCategoryTypes: []
+  activeTypes: []
 };
 
 const categoriesSlice = createSlice({
@@ -18,9 +18,14 @@ const categoriesSlice = createSlice({
   reducers: {
     setActiveCategory: (state, action: PayloadAction<TProductCategory>) => {
       state.activeCategory = action.payload;
+      state.activeTypes = [];
     },
-    setActiveCategoryTypes: (state, action: PayloadAction<string[]>) => {
-      state.activeCategoryTypes = action.payload;
+    setActiveTypes: (state, action: PayloadAction<string>) => {
+      if (state.activeTypes.includes(action.payload)) {
+        state.activeTypes = state.activeTypes.filter((type) => type !== action.payload);
+      } else {
+        state.activeTypes.push(action.payload);
+      }
     }
   },
   extraReducers: (builder) => {
@@ -39,6 +44,6 @@ const categoriesSlice = createSlice({
   }
 });
 
-export const {setActiveCategory, setActiveCategoryTypes} = categoriesSlice.actions;
+export const {setActiveCategory, setActiveTypes} = categoriesSlice.actions;
 
 export default categoriesSlice;
