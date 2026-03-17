@@ -25,11 +25,19 @@ export enum ReviewsSortType {
   Descending = 'сортировка по убыванию'
 }
 
-export const CategoryMap = {
-  ['bisque']: 'Бисквит',
-  ['cheesecake']: 'Чизкейк',
-  ['shortbread']: 'Песочное',
-  ['dessert']: 'Десерт'
+export enum ProductCategory {
+  All = 'all',
+  Bisque = 'bisque',
+  Cheesecake = 'cheesecake',
+  Dessert = 'dessert',
+  Shortbread = 'shortbread'
+}
+
+export const CategoryName = {
+  [ProductCategory.Bisque]: 'Бисквит',
+  [ProductCategory.Cheesecake]: 'Чизкейк',
+  [ProductCategory.Shortbread]: 'Песочное',
+  [ProductCategory.Dessert]: 'Десерт'
 } as Readonly<Record<string, string>>;
 
 export const CategoryTypeMap = {

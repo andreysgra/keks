@@ -1,11 +1,12 @@
 import classNames from 'classnames';
-import {CategoryMap} from '../../const';
+import {CategoryName} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {getActiveCategory, getCategories} from '../../store/category/selectors';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {MouseEvent} from 'react';
 import {TCategory} from '../../types/category';
 import {setActiveCategory, setActiveCategoryTypes} from '../../store/category/slice';
+import {TProductCategory} from '../../store/category/type';
 
 function CatalogFilterFirst() {
   const dispatch = useAppDispatch();
@@ -14,7 +15,7 @@ function CatalogFilterFirst() {
 
   const handleButtonClick = (evt: MouseEvent<HTMLButtonElement>) => {
     const value = evt.currentTarget.value;
-    const selectedCategory = (activeCategory !== value) ? value : null;
+    const selectedCategory = ((activeCategory !== value) ? value : null) as TProductCategory;
     const currentCategory = categories.find(({category}) => category === selectedCategory) as TCategory;
 
     dispatch(setActiveCategory(selectedCategory));
@@ -41,7 +42,7 @@ function CatalogFilterFirst() {
               value={category}
               onClick={handleButtonClick}
             >
-              {CategoryMap[category]}
+              {CategoryName[category]}
             </button>
           </li>
         ))}

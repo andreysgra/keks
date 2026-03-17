@@ -2,13 +2,13 @@ import {RequestStatus} from '../../services/api/const';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {StoreSlice} from '../const';
 import {fetchCategories} from './api-actions';
-import {TCategoriesState} from './type';
+import {TCategoriesState, TProductCategory} from './type';
 import {TCategories} from '../../types/category';
 
 const initialState: TCategoriesState = {
   categories: [],
   loadingStatus: RequestStatus.Idle,
-  activeCategory: null,
+  activeCategory:  null,
   activeCategoryTypes: []
 };
 
@@ -16,7 +16,7 @@ const categoriesSlice = createSlice({
   name: StoreSlice.Products,
   initialState,
   reducers: {
-    setActiveCategory: (state, action: PayloadAction<string | null>) => {
+    setActiveCategory: (state, action: PayloadAction<TProductCategory>) => {
       state.activeCategory = action.payload;
     },
     setActiveCategoryTypes: (state, action: PayloadAction<string[]>) => {
