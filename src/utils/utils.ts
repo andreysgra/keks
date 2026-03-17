@@ -1,7 +1,9 @@
-import {TFilterReviews} from '../types/filter';
+import {TFilterByCategoryProducts, TFilterReviews} from '../types/filter';
 import {TReview, TReviews} from '../types/review';
-import {RATING_LOW} from '../const';
+import {ProductCategory, RATING_LOW} from '../const';
 import {TSortReviews} from '../types/sorting';
+import {TProducts} from '../types/product';
+
 
 export const shuffleArray = <T>(array: T[]): T[] => {
   const shuffled = [...array];
@@ -34,4 +36,16 @@ export const FilterReviewsByRating: TFilterReviews = {
 export const SortReviewsByDate: TSortReviews = {
   Ascending: (a: TReview, b: TReview) => Date.parse(a.isoDate) - Date.parse(b.isoDate),
   Descending: (a: TReview, b: TReview) => Date.parse(b.isoDate) - Date.parse(a.isoDate)
+};
+
+export const FilterProductsByCategory: TFilterByCategoryProducts = {
+  [ProductCategory.All]: (products: TProducts) => products,
+  [ProductCategory.Bisque]: (products: TProducts) =>
+    products.filter((product) => product.category === ProductCategory.Bisque as string),
+  [ProductCategory.Cheesecake]: (products: TProducts) => products.filter((product) =>
+    product.category === ProductCategory.Cheesecake as string),
+  [ProductCategory.Shortbread]: (products: TProducts) => products.filter((product) =>
+    product.category === ProductCategory.Shortbread as string),
+  [ProductCategory.Dessert]: (products: TProducts) => products.filter((product) =>
+    product.category === ProductCategory.Dessert as string)
 };
