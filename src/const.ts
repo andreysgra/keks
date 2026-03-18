@@ -25,6 +25,48 @@ export enum ReviewsSortType {
   Descending = 'сортировка по убыванию'
 }
 
+export enum ProductCategory {
+  Bisque = 'bisque',
+  Cheesecake = 'cheesecake',
+  Dessert = 'dessert',
+  Shortbread = 'shortbread'
+}
+
+export enum ProductType {
+  Chocolate = 'chocolate',
+  Vanilla = 'vanilla',
+  Vegetarian = 'vegetarian',
+  HoneyCake = 'honey-cake',
+  Lemon = 'lemon',
+  NewYork = 'new-york',
+  Tart = 'tart',
+  FunnelCake = 'funnel-cake',
+  BasketCake = 'basket-cake',
+  ChocolateMuffin = 'chocolate-muffin',
+  BrandMuffin = 'brand-muffin'
+}
+
+export const ProductCategoryName: Record<string, string> = {
+  [ProductCategory.Bisque]: 'Бисквит',
+  [ProductCategory.Cheesecake]: 'Чизкейк',
+  [ProductCategory.Shortbread]: 'Песочное',
+  [ProductCategory.Dessert]: 'Десерт'
+};
+
+export const ProductTypeName: Record<string, string> = {
+  [ProductType.Chocolate]: 'Шоколадный',
+  [ProductType.Vanilla]: 'Ваниль',
+  [ProductType.Vegetarian]: 'Вегетарианский',
+  [ProductType.HoneyCake]: 'Медовый',
+  [ProductType.Lemon]: 'Лимонный',
+  [ProductType.NewYork]: 'Нью-Йорк',
+  [ProductType.Tart]: 'Тарт',
+  [ProductType.FunnelCake]: 'Муравейник',
+  [ProductType.BasketCake]: 'Корзинка',
+  [ProductType.ChocolateMuffin]: 'Шоколадный маффин',
+  [ProductType.BrandMuffin]: 'Фирменный маффин'
+};
+
 export const Shops: TShopLocation = {
   FIRST_SHOP: {
     name: 'Кондитерская 1',
