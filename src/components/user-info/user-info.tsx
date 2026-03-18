@@ -1,4 +1,9 @@
+import {getUser} from '../../store/user/selectors';
+import {useAppSelector} from '../../hooks/use-app-selector';
+
 function UserInfo() {
+  const user = useAppSelector(getUser);
+
   return (
     <div className="header__user-info-wrap">
       <div className="header__user-info">
@@ -6,21 +11,20 @@ function UserInfo() {
           <picture>
             <source
               type="image/webp"
-              srcSet="img/content/user-avatar.webp, img/content/user-avatar@2x.webp 2x"
+              srcSet={`${user?.avatarUrl}, ${user?.avatarUrl} 2x`}
             />
             <img
-              src="img/content/user-avatar.jpg"
-              srcSet="img/content/user-avatar@2x.jpg 2x"
+              src={user?.avatarUrl}
+              srcSet={`${user?.avatarUrl} 2x`}
               width={62}
               height={62}
-              alt="Аватар пользователя."
+              alt={`Аватар ${user?.name}.`}
             />
           </picture>
         </div>
-        <p className="header__user-mail">keks@academy.ru</p>
+        <p className="header__user-mail">{user?.email}</p>
       </div>
     </div>
-
   );
 }
 
