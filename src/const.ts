@@ -26,7 +26,6 @@ export enum ReviewsSortType {
 }
 
 export enum ProductCategory {
-  All = 'all',
   Bisque = 'bisque',
   Cheesecake = 'cheesecake',
   Dessert = 'dessert',
@@ -47,14 +46,14 @@ export enum ProductType {
   BrandMuffin = 'brand-muffin'
 }
 
-export const ProductCategoryName = {
+export const ProductCategoryName: Record<string, string> = {
   [ProductCategory.Bisque]: 'Бисквит',
   [ProductCategory.Cheesecake]: 'Чизкейк',
   [ProductCategory.Shortbread]: 'Песочное',
   [ProductCategory.Dessert]: 'Десерт'
-} as Readonly<Record<string, string>>;
+};
 
-export const ProductTypeName = {
+export const ProductTypeName: Record<string, string> = {
   [ProductType.Chocolate]: 'Шоколадный',
   [ProductType.Vanilla]: 'Ваниль',
   [ProductType.Vegetarian]: 'Вегетарианский',
@@ -66,7 +65,7 @@ export const ProductTypeName = {
   [ProductType.BasketCake]: 'Корзинка',
   [ProductType.ChocolateMuffin]: 'Шоколадный маффин',
   [ProductType.BrandMuffin]: 'Фирменный маффин'
-} as Readonly<Record<string, string>>;
+};
 
 export const Shops: TShopLocation = {
   FIRST_SHOP: {

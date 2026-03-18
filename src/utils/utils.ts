@@ -39,7 +39,6 @@ export const SortReviewsByDate: TSortReviews = {
 };
 
 export const FilterProductsByCategory: TFilterByCategoryProducts = {
-  [ProductCategory.All]: (products: TProducts) => products,
   [ProductCategory.Bisque]: (products: TProducts) =>
     products.filter((product) => product.category === ProductCategory.Bisque as string),
   [ProductCategory.Cheesecake]: (products: TProducts) => products.filter((product) =>
