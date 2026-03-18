@@ -5,6 +5,7 @@ import {ChangeEvent} from 'react';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {setActiveTypes} from '../../store/category/slice';
 import {TCategory} from '../../types/category';
+import {TProductType} from '../../store/category/type';
 
 function CatalogFilterSecond() {
   const activeCategoryTypes = useAppSelector(getActiveTypes);
@@ -15,7 +16,7 @@ function CatalogFilterSecond() {
   const dispatch = useAppDispatch();
 
   const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setActiveTypes(evt.currentTarget.value));
+    dispatch(setActiveTypes(evt.currentTarget.value as TProductType));
   };
 
   return (
@@ -33,7 +34,7 @@ function CatalogFilterSecond() {
                 id={`catalog-second-level-id-${index}`}
                 name="catalog-second-level"
                 onChange={handleInputChange}
-                checked={activeCategoryTypes.includes(type)}
+                checked={activeCategoryTypes.includes(type as TProductType)}
               />
               <label
                 className="custom-toggle__label"

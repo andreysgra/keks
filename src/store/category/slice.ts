@@ -2,7 +2,7 @@ import {RequestStatus} from '../../services/api/const';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {StoreSlice} from '../const';
 import {fetchCategories} from './api-actions';
-import {TCategoriesState, TProductCategory} from './type';
+import {TCategoriesState, TProductCategory, TProductType} from './type';
 import {TCategories} from '../../types/category';
 
 const initialState: TCategoriesState = {
@@ -20,7 +20,7 @@ const categoriesSlice = createSlice({
       state.activeCategory = action.payload;
       state.activeTypes = [];
     },
-    setActiveTypes: (state, action: PayloadAction<string>) => {
+    setActiveTypes: (state, action: PayloadAction<TProductType>) => {
       if (state.activeTypes.includes(action.payload)) {
         state.activeTypes = state.activeTypes.filter((type) => type !== action.payload);
       } else {

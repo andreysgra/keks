@@ -1,12 +1,14 @@
 import {TCategories} from '../../types/category';
 import {RequestStatus} from '../../services/api/const';
-import {ProductCategory} from '../../const';
+import {ProductCategory, ProductType} from '../../const';
 
 export type TProductCategory = keyof typeof ProductCategory | null;
+
+export type TProductType = keyof typeof ProductType;
 
 export type TCategoriesState = {
   categories: TCategories;
   loadingStatus: RequestStatus;
   activeCategory: TProductCategory;
-  activeTypes: string[];
+  activeTypes: TProductType[];
 }
