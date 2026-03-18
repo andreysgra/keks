@@ -7,7 +7,7 @@ import {setActiveTypes} from '../../store/category/slice';
 import {TCategory} from '../../types/category';
 import {TProductType} from '../../store/category/type';
 
-function CatalogFilterSecond() {
+function CatalogFilterTypes() {
   const activeCategoryTypes = useAppSelector(getActiveTypes);
   const activeCategory = useAppSelector(getActiveCategory);
   const categories = useAppSelector(getCategories);
@@ -50,4 +50,4 @@ function CatalogFilterSecond() {
   );
 }
 
-export default CatalogFilterSecond;
+export default CatalogFilterTypes;

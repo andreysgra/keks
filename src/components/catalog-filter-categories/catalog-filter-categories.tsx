@@ -7,7 +7,7 @@ import {MouseEvent} from 'react';
 import {setActiveCategory} from '../../store/category/slice';
 import {TProductCategory} from '../../store/category/type';
 
-function CatalogFilterFirst() {
+function CatalogFilterCategories() {
   const categories = useAppSelector(getCategories);
   const activeCategory = useAppSelector(getActiveCategory);
 
@@ -46,4 +46,4 @@ function CatalogFilterFirst() {
   );
 }
 
-export default CatalogFilterFirst;
+export default CatalogFilterCategories;
