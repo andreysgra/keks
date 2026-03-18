@@ -24,7 +24,8 @@ function ReviewList({reviews}: ReviewListProps) {
   const handleShowMoreButtonClick = () =>
     dispatch(setReviewsCount(displayedComments + REVIEWS_PER_LOAD));
 
-  const isShowMoreButtonShowed = reviews.length > displayedComments;
+  const isShowMore = reviews.length > displayedComments;
+  const isShowMoreDisplayed = reviews.length > REVIEWS_PER_LOAD;
 
   return (
     <section className="comments">
@@ -33,9 +34,11 @@ function ReviewList({reviews}: ReviewListProps) {
         <div className="comments__wrapper">
           {reviews.slice(0, displayedComments).map((review) => <Review key={review.id} review={review}/>)}
         </div>
-        <div className="comments__show-more">
-          <ShowMoreButton onClick={handleShowMoreButtonClick} isComments isShowed={isShowMoreButtonShowed}/>
-        </div>
+        {isShowMoreDisplayed && (
+          <div className="comments__show-more">
+            <ShowMoreButton onClick={handleShowMoreButtonClick} isComments isShowMore={isShowMore}/>
+          </div>
+        )}
       </div>
     </section>
   );

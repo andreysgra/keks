@@ -20,7 +20,8 @@ function CatalogPage() {
   const handleShowMoreButtonClick = () =>
     dispatch(setProductsCount(displayedProducts + PRODUCTS_PER_LOAD));
 
-  const isShowMoreButtonShowed = products.length > displayedProducts;
+  const isShowMore = products.length > displayedProducts;
+  const isShowMoreDisplayed = products.length > PRODUCTS_PER_LOAD;
 
   return (
     <div className="wrapper">
@@ -34,9 +35,11 @@ function CatalogPage() {
             <h2 className="visually-hidden">Каталог</h2>
             <div className="catalog__wrapper">
               <CatalogList products={products.slice(0, displayedProducts)} />
-              <div className="catalog__button-wrapper">
-                <ShowMoreButton onClick={handleShowMoreButtonClick} isShowed={isShowMoreButtonShowed} />
-              </div>
+              {isShowMoreDisplayed && (
+                <div className="catalog__button-wrapper">
+                  <ShowMoreButton onClick={handleShowMoreButtonClick} isShowMore={isShowMore}/>
+                </div>
+              )}
             </div>
           </div>
         </section>
