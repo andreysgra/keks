@@ -3,7 +3,7 @@ import {State} from '../../types/state';
 import {RequestStatus} from '../../services/api/const';
 import {createSelector} from '@reduxjs/toolkit';
 import {getProducts} from '../products/selectors';
-import {FilterProductsByCategory} from '../../utils/utils';
+import {FilterProductsByCategory, FilterProductsByType} from '../../utils/utils';
 import {ProductCategory} from '../../const';
 
 const storeSlice = StoreSlice.Categories;
@@ -21,7 +21,15 @@ export const getActiveCategory = (state: State) => state[storeSlice].activeCateg
 export const getActiveTypes = (state: State)=> state[storeSlice].activeTypes;
 
 export const getFilteredProducts = createSelector(
-  [getProducts, getActiveCategory],
-  (products, activeCategory) =>
-    FilterProductsByCategory[activeCategory ?? ProductCategory.All](products)
+  [getProducts, getActiveCategory, getActiveTypes],
+  (products, activeCategory, activeTypes) => {
+    const productsByCategory = FilterProductsByCategory[activeCategory ?? ProductCategory.All](products);
+
+    if (activeTypes.length === 0) {
+      return productsByCategory;
+    } else {
+      return activeTypes.map((productType) =>
+        FilterProductsByType[productType](productsByCategory)).flat();
+    }
+  }
 );
