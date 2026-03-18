@@ -1,4 +1,4 @@
-import {TUser, TUserRegistration} from '../../types/user';
+import {TUser, TUserAuth, TUserRegistration} from '../../types/user';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
 import {StoreSlice} from '../const';
@@ -10,6 +10,19 @@ export const fetchUserStatus = createAsyncThunk<TUser, undefined, {extra: AxiosI
   `${StoreSlice.User}/fetch`,
   async (_, {extra: api}) => {
     const {data} = await api.get<TUser>(ApiRoute.Login);
+
+    return data;
+  }
+);
+
+export const loginUser = createAsyncThunk<TUser, TUserAuth, {extra: AxiosInstance}>(
+  `${StoreSlice.User}/login`,
+  async ({email, password}, {extra: api}) => {
+    const {data} = await api.post<TUser>(ApiRoute.Login, {email, password});
+    const {token} = data;
+
+    saveToken(token);
+    browserHistory.back();
 
     return data;
   }

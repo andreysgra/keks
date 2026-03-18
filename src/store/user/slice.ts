@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {StoreSlice} from '../const';
 import {TUserState} from './type';
-import {fetchUserStatus, registerUser} from './api-actions';
+import {fetchUserStatus, loginUser, registerUser} from './api-actions';
 import {TUser} from '../../types/user';
 import {AuthorizationStatus, RequestStatus} from '../../services/api/const';
 
@@ -36,6 +36,10 @@ const userSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state) => {
         state.registrationStatus = RequestStatus.Error;
+      })
+      .addCase(loginUser.fulfilled, (state, action: PayloadAction<TUser>) => {
+        state.user = action.payload;
+        state.authorizationStatus = AuthorizationStatus.Auth;
       });
   }
 });

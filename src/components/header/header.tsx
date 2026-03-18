@@ -4,10 +4,12 @@ import {AppRoute} from '../../const';
 import UserNavigation from '../user-navigation/user-navigation';
 import UserInfo from '../user-info/user-info';
 import classNames from 'classnames';
+import {useAppSelector} from '../../hooks/use-app-selector';
+import {getIsAuthorized} from '../../store/user/selectors';
 
 function Header() {
   const isRoot = useLocation().pathname === AppRoute.Root as string;
-  const isAuthorized = false;
+  const isAuthorized = useAppSelector(getIsAuthorized);
 
   return (
     <header className={classNames('header', {'header--authorized': isAuthorized})}>
