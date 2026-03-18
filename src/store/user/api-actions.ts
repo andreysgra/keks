@@ -3,7 +3,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
 import {StoreSlice} from '../const';
 import {ApiRoute} from '../../services/api/api-route';
-import {saveToken} from '../../services/token';
+import {dropToken, saveToken} from '../../services/token';
 import browserHistory from '../../services/browser-history';
 
 export const fetchUserStatus = createAsyncThunk<TUser, undefined, {extra: AxiosInstance}>(
@@ -25,6 +25,15 @@ export const loginUser = createAsyncThunk<TUser, TUserAuth, {extra: AxiosInstanc
     browserHistory.back();
 
     return data;
+  }
+);
+
+export const logoutUser = createAsyncThunk<void, undefined, {extra: AxiosInstance}>(
+  `${StoreSlice.User}/logout`,
+  async (_, {extra: api}) => {
+    await api.delete(ApiRoute.Logout);
+
+    dropToken();
   }
 );
 
