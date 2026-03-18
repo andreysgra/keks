@@ -6,6 +6,15 @@ import {ApiRoute} from '../../services/api/api-route';
 import {saveToken} from '../../services/token';
 import browserHistory from '../../services/browser-history';
 
+export const fetchUserStatus = createAsyncThunk<TUser, undefined, {extra: AxiosInstance}>(
+  `${StoreSlice.User}/fetch`,
+  async (_, {extra: api}) => {
+    const {data} = await api.get<TUser>(ApiRoute.Login);
+
+    return data;
+  }
+);
+
 export const registerUser = createAsyncThunk<TUser, TUserRegistration, {extra: AxiosInstance}>(
   `${StoreSlice.User}/registration`,
   async ({name, email, password}, {extra: api}) => {

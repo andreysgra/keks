@@ -1,13 +1,14 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {StoreSlice} from '../const';
 import {TUserState} from './type';
-import {registerUser} from './api-actions';
+import {fetchUserStatus, registerUser} from './api-actions';
 import {TUser} from '../../types/user';
-import {RequestStatus} from '../../services/api/const';
+import {AuthorizationStatus, RequestStatus} from '../../services/api/const';
 
 const initialState: TUserState = {
   user: null,
-  registrationStatus: RequestStatus.Idle
+  registrationStatus: RequestStatus.Idle,
+  authorizationStatus: AuthorizationStatus.Unknown
 };
 
 const userSlice = createSlice({
@@ -16,6 +17,16 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(fetchUserStatus.fulfilled, (state, action: PayloadAction<TUser>) => {
+        state.user = action.payload;
+        state.authorizationStatus = AuthorizationStatus.Auth;
+      })
+      .addCase(fetchUserStatus.pending, (state) => {
+        state.authorizationStatus = AuthorizationStatus.Unknown;
+      })
+      .addCase(fetchUserStatus.rejected, (state) => {
+        state.authorizationStatus = AuthorizationStatus.NoAuth;
+      })
       .addCase(registerUser.fulfilled, (state, action: PayloadAction<TUser>) => {
         state.user = action.payload;
         state.registrationStatus = RequestStatus.Success;

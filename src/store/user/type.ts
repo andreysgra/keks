@@ -1,7 +1,8 @@
 import {TUser} from '../../types/user';
-import {RequestStatus} from '../../services/api/const';
+import {AuthorizationStatus, RequestStatus} from '../../services/api/const';
 
 export type TUserState = {
   user: TUser | null;
+  authorizationStatus: AuthorizationStatus;
   registrationStatus: RequestStatus;
 }

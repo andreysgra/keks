@@ -4,7 +4,9 @@ import App from './components/app/app';
 import {Provider} from 'react-redux';
 import store from './store';
 import {fetchProducts} from './store/products/api-actions';
+import {fetchUserStatus} from './store/user/api-actions';
 
+store.dispatch(fetchUserStatus());
 store.dispatch(fetchProducts());
 
 const root = ReactDOM.createRoot(
