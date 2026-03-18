@@ -1,6 +1,6 @@
-import {TFilterByCategoryProducts, TFilterReviews} from '../types/filter';
+import {TFilterByCategoryProducts, TFilterByTypeProducts, TFilterReviews} from '../types/filter';
 import {TReview, TReviews} from '../types/review';
-import {ProductCategory, RATING_LOW} from '../const';
+import {ProductCategory, ProductType, RATING_LOW} from '../const';
 import {TSortReviews} from '../types/sorting';
 import {TProducts} from '../types/product';
 
@@ -48,4 +48,29 @@ export const FilterProductsByCategory: TFilterByCategoryProducts = {
     product.category === ProductCategory.Shortbread as string),
   [ProductCategory.Dessert]: (products: TProducts) => products.filter((product) =>
     product.category === ProductCategory.Dessert as string)
+};
+
+export const FilterProductsByType: TFilterByTypeProducts = {
+  [ProductType.BrandMuffin]: (products) =>
+    products.filter((product) => product.type === ProductType.BrandMuffin as string),
+  [ProductType.Tart]: (products) =>
+    products.filter((product) => product.type === ProductType.Tart as string),
+  [ProductType.ChocolateMuffin]: (products) =>
+    products.filter((product) => product.type === ProductType.ChocolateMuffin as string),
+  [ProductType.NewYork]: (products) =>
+    products.filter((product) => product.type === ProductType.NewYork as string),
+  [ProductType.Lemon]: (products) =>
+    products.filter((product) => product.type === ProductType.Lemon as string),
+  [ProductType.BasketCake]: (products) =>
+    products.filter((product) => product.type === ProductType.BasketCake as string),
+  [ProductType.FunnelCake]: (products) =>
+    products.filter((product) => product.type === ProductType.FunnelCake as string),
+  [ProductType.HoneyCake]: (products) =>
+    products.filter((product) => product.type === ProductType.HoneyCake as string),
+  [ProductType.Vegetarian]: (products) =>
+    products.filter((product) => product.type === ProductType.Vegetarian as string),
+  [ProductType.Chocolate]: (products) =>
+    products.filter((product) => product.type === ProductType.Chocolate as string),
+  [ProductType.Vanilla]: (products) =>
+    products.filter((product) => product.type === ProductType.Vanilla as string)
 };
