@@ -112,3 +112,8 @@ export const STARS_COUNT = 5;
 export const DESCRIPTION_MAX_LENGTH = 140;
 
 export const RATING_LOW = 3;
+
+export const VALID_NAME_PATTERN = /^[A-Za-zА-яЁё]{1,}$/;
+
+export const VALID_PASSWORD_PATTERN = /^(?=.*[a-zA-Z])(?=.*\d)(?=.+$)/;
+
