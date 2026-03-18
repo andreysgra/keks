@@ -17,7 +17,7 @@ function Header() {
         <div className="header__inner">
           <Logo isRoot={isRoot} />
           {isAuthorized && <UserInfo />}
-          <UserNavigation isAuthorized={isAuthorized} />
+          <UserNavigation />
         </div>
       </div>
     </header>
