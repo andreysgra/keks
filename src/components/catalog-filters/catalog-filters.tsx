@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
 import {useAppSelector} from '../../hooks/use-app-selector';
-import {getActiveCategory} from '../../store/category/selectors';
+import {getActiveCategory, getIsCategoriesFailed} from '../../store/category/selectors';
 import {fetchCategories} from '../../store/category/api-actions';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import CatalogFilterSecond from '../catalog-filter-second/catalog-filter-second';
@@ -15,10 +15,12 @@ function CatalogFilters() {
     dispatch(fetchCategories());
   }, [dispatch]);
 
+  const isCategoriesFailed = useAppSelector(getIsCategoriesFailed);
+
   return (
     <div className="catalog-filter">
       <div className="container">
-        <CatalogFilterFirst />
+        {!isCategoriesFailed && <CatalogFilterFirst />}
         {activeCategory && <CatalogFilterSecond />}
       </div>
     </div>
