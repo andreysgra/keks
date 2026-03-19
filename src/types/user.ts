@@ -5,6 +5,9 @@ export type TUser = {
   token: string;
 }
 
-export type TUserRegistration = Pick<TUser, 'name' | 'email'> & {password: string}
+export type TUserRegistration = Pick<TUser, 'name' | 'email'> & {
+  password: string;
+  avatar?: File;
+}
 
 export type TUserAuth = Omit<TUserRegistration, 'name'>

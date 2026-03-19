@@ -68,8 +68,10 @@ export const ProductTypeName: Record<string, string> = {
 };
 
 export enum ErrorMessage {
+  Name= 'Имя должно содержать хотя бы одну букву',
   Email = 'Некорректный адрес электронной почты',
-  Password = 'Пароль должен содержать минимум одну букву и одну цифру'
+  Password = 'Пароль должен содержать минимум одну букву и одну цифру',
+  Avatar = 'Некорректный размер или разрешение изображения'
 }
 
 export const Shops: TShopLocation = {
@@ -117,6 +119,12 @@ export const STARS_COUNT = 5;
 export const DESCRIPTION_MAX_LENGTH = 140;
 
 export const RATING_LOW = 3;
+
+export const AVATAR_IMAGE_TYPES = ['jpg', 'jpeg', 'png'];
+
+export const AVATAR_IMAGE_SIZE = 1048576;
+
+export const AVATAR_IMAGE_WIDTH = 100, AVATAR_IMAGE_HEIGHT = 100;
 
 export const VALID_NAME_PATTERN = /^[A-Za-zА-яЁё]{1,}$/;
 
