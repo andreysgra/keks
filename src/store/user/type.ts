@@ -5,4 +5,5 @@ export type TUserState = {
   user: TUser | null;
   authorizationStatus: AuthorizationStatus;
   registrationStatus: RequestStatus;
+  loginStatus: RequestStatus;
 }

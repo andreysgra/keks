@@ -8,9 +8,11 @@ export const getRegistrationStatus =
   (state: State) => state[storeSlice].registrationStatus;
 
 export const getAuthorizationStatus = (state: State) =>
-  state[StoreSlice.User].authorizationStatus;
+  state[storeSlice].authorizationStatus;
 
 export const getIsAuthorized = (state: State): boolean =>
-  state[StoreSlice.User].authorizationStatus === AuthorizationStatus.Auth;
+  state[storeSlice].authorizationStatus === AuthorizationStatus.Auth;
 
-export const getUser = (state: State) => state[StoreSlice.User].user;
+export const getUser = (state: State) => state[storeSlice].user;
+
+export const getLoginStatus = (state: State) => state[storeSlice].loginStatus;

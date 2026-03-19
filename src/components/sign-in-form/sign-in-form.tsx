@@ -1,14 +1,30 @@
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
-import {FormEvent, useState} from 'react';
+import {FormEvent, useEffect, useState} from 'react';
 import {TUserAuth} from '../../types/user';
 import {ErrorMessage, VALID_EMAIL_PATTERN, VALID_PASSWORD_PATTERN} from '../../const';
 import {loginUser} from '../../store/user/api-actions';
 import classNames from 'classnames';
+import {useAppSelector} from '../../hooks/use-app-selector';
+import {getLoginStatus} from '../../store/user/selectors';
+import {RequestStatus} from '../../services/api/const';
+import {toast} from 'react-toastify';
 
 function SignInForm() {
   const [isValueValid, setIsValueValid] = useState({email: true, password: true});
   const [errorMessage, setErrorMessage] = useState('');
+
   const dispatch = useAppDispatch();
+
+  const loginStatus = useAppSelector(getLoginStatus);
+
+  const isDisabled = loginStatus === RequestStatus.Pending;
+
+  useEffect(() => {
+    if (loginStatus === RequestStatus.Error) {
+      toast.dismiss();
+      toast.error(ErrorMessage.Login);
+    }
+  }, [loginStatus]);
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -77,7 +93,7 @@ function SignInForm() {
             </label>
           </div>
         </div>
-        <button className="btn login-page__btn btn--large" type="submit">
+        <button className="btn login-page__btn btn--large" type="submit" disabled={isDisabled}>
           Войти
         </button>
       </form>

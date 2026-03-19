@@ -8,7 +8,8 @@ import {AuthorizationStatus, RequestStatus} from '../../services/api/const';
 const initialState: TUserState = {
   user: null,
   registrationStatus: RequestStatus.Idle,
-  authorizationStatus: AuthorizationStatus.Unknown
+  authorizationStatus: AuthorizationStatus.Unknown,
+  loginStatus: RequestStatus.Idle
 };
 
 const userSlice = createSlice({
@@ -40,6 +41,13 @@ const userSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action: PayloadAction<TUser>) => {
         state.user = action.payload;
         state.authorizationStatus = AuthorizationStatus.Auth;
+        state.loginStatus = RequestStatus.Success;
+      })
+      .addCase(loginUser.pending, (state) => {
+        state.loginStatus = RequestStatus.Pending;
+      })
+      .addCase(loginUser.rejected, (state) => {
+        state.loginStatus = RequestStatus.Error;
       })
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
