@@ -1,10 +1,13 @@
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
-import {FormEvent} from 'react';
+import {FormEvent, useState} from 'react';
 import {TUserAuth} from '../../types/user';
-import {VALID_PASSWORD_PATTERN} from '../../const';
+import {ErrorMessage, VALID_EMAIL_PATTERN, VALID_PASSWORD_PATTERN} from '../../const';
 import {loginUser} from '../../store/user/api-actions';
+import classNames from 'classnames';
 
 function SignInForm() {
+  const [isValueValid, setIsValueValid] = useState({email: true, password: true});
+  const [errorMessage, setErrorMessage] = useState('');
   const dispatch = useAppDispatch();
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
@@ -12,39 +15,64 @@ function SignInForm() {
 
     const formData = Object.fromEntries(new FormData(evt.currentTarget)) as TUserAuth;
 
-    if (!formData.password.match(VALID_PASSWORD_PATTERN)) {
+    if (!formData.email.match(VALID_EMAIL_PATTERN)) {
+      setErrorMessage(ErrorMessage.Email);
+      setIsValueValid({email: false, password: true});
+
       return;
     }
 
-    dispatch(loginUser({
-      email: formData.email,
-      password: formData.password
-    }));
+    if (!formData.password.match(VALID_PASSWORD_PATTERN)) {
+      setErrorMessage(ErrorMessage.Password);
+      setIsValueValid({email: true, password: false});
+
+      return;
+    }
+
+    dispatch(loginUser(formData));
+  };
+
+  const handleFormChange = ()=> {
+    setIsValueValid({email: true, password: true});
   };
 
   return (
     <div className="login-page__form">
-      <form action="#" method="post" autoComplete="off" onSubmit={handleFormSubmit}>
+      <form action="#" method="post" autoComplete="off" onSubmit={handleFormSubmit} noValidate>
         <div className="login-page__fields">
-          <div className="custom-input login-page__field">
+          <div className={classNames('custom-input login-page__field', {'is-invalid': !isValueValid.email})}>
             <label>
-              <span className="custom-input__label">Введите вашу почту</span>
+              <span className={classNames(
+                {'custom-input__label': isValueValid.email},
+                {'custom-input__message': !isValueValid.email}
+              )}
+              >
+                {isValueValid.email ? 'Введите вашу почту' : errorMessage}
+              </span>
               <input
                 type="email"
                 name="email"
                 placeholder="Почта"
                 required
+                onChange={handleFormChange}
               />
             </label>
           </div>
-          <div className="custom-input login-page__field">
+          <div className={classNames('custom-input login-page__field', {'is-invalid': !isValueValid.password})}>
             <label>
-              <span className="custom-input__label">Введите ваш пароль</span>
+              <span className={classNames(
+                {'custom-input__label': isValueValid.password},
+                {'custom-input__message': !isValueValid.password}
+              )}
+              >
+                {isValueValid.password ? 'Введите ваш пароль' : errorMessage}
+              </span>
               <input
                 type="password"
                 name="password"
                 placeholder="Пароль"
                 required
+                onChange={handleFormChange}
               />
             </label>
           </div>

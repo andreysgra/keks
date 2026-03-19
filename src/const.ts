@@ -67,6 +67,11 @@ export const ProductTypeName: Record<string, string> = {
   [ProductType.BrandMuffin]: 'Фирменный маффин'
 };
 
+export enum ErrorMessage {
+  Email = 'Некорректный адрес электронной почты',
+  Password = 'Пароль должен содержать минимум одну букву и одну цифру'
+}
+
 export const Shops: TShopLocation = {
   FIRST_SHOP: {
     name: 'Кондитерская 1',
@@ -114,6 +119,8 @@ export const DESCRIPTION_MAX_LENGTH = 140;
 export const RATING_LOW = 3;
 
 export const VALID_NAME_PATTERN = /^[A-Za-zА-яЁё]{1,}$/;
+
+export const VALID_EMAIL_PATTERN = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 export const VALID_PASSWORD_PATTERN = /^(?=.*[a-zA-Z])(?=.*\d)(?=.+$)/;
 
