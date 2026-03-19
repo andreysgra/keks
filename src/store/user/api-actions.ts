@@ -5,6 +5,7 @@ import {StoreSlice} from '../const';
 import {ApiRoute} from '../../services/api/api-route';
 import {dropToken, saveToken} from '../../services/token';
 import browserHistory from '../../services/browser-history';
+import {AppDispatch} from '../../types/state';
 
 export const fetchUserStatus = createAsyncThunk<TUser, undefined, {extra: AxiosInstance}>(
   `${StoreSlice.User}/fetch`,
@@ -37,13 +38,18 @@ export const logoutUser = createAsyncThunk<void, undefined, {extra: AxiosInstanc
   }
 );
 
-export const registerUser = createAsyncThunk<TUser, TUserRegistration, {extra: AxiosInstance}>(
+export const registerUser = createAsyncThunk<TUser, TUserRegistration, {
+  extra: AxiosInstance;
+  dispatch: AppDispatch;
+}>(
   `${StoreSlice.User}/registration`,
-  async ({name, email, password}, {extra: api}) => {
+  async ({name, email, password}, {extra: api, dispatch}) => {
     const {data} = await api.post<TUser>(ApiRoute.Registration, {name, email, password});
     const {token} = data;
 
     saveToken(token);
+
+    dispatch(loginUser({email, password}));
     browserHistory.back();
 
     return data;

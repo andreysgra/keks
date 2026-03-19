@@ -1,16 +1,31 @@
-import {FormEvent, useState} from 'react';
+import {FormEvent, useEffect, useState} from 'react';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {registerUser} from '../../store/user/api-actions';
 import {TUserRegistration} from '../../types/user';
 import {ErrorMessage, VALID_EMAIL_PATTERN, VALID_NAME_PATTERN, VALID_PASSWORD_PATTERN} from '../../const';
 import classNames from 'classnames';
 import {validateAvatarFile} from '../../utils/utils';
+import {useAppSelector} from '../../hooks/use-app-selector';
+import {getRegistrationStatus} from '../../store/user/selectors';
+import {RequestStatus} from '../../services/api/const';
+import {toast} from 'react-toastify';
 
 function SignUpForm() {
   const [isValueValid, setIsValueValid] = useState({name: true, email: true, password: true, avatar: true});
   const [errorMessage, setErrorMessage] = useState('');
 
   const dispatch = useAppDispatch();
+
+  const registrationStatus = useAppSelector(getRegistrationStatus);
+
+  const isDisabled = registrationStatus === RequestStatus.Pending;
+
+  useEffect(() => {
+    if (registrationStatus === RequestStatus.Error) {
+      toast.dismiss();
+      toast.error(ErrorMessage.Registration);
+    }
+  }, [registrationStatus, dispatch]);
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -38,7 +53,7 @@ function SignUpForm() {
       return;
     }
 
-    if (!validateAvatarFile(formData.avatar as File)) {
+    if (formData.avatar?.name && !validateAvatarFile(formData.avatar)) {
       setErrorMessage(ErrorMessage.Avatar);
       setIsValueValid({name: true, email: true, password: true, avatar: false});
 
@@ -129,7 +144,7 @@ function SignUpForm() {
             </label>
           </div>
         </div>
-        <button className="btn register-page__btn btn--large" type="submit">
+        <button className="btn register-page__btn btn--large" type="submit" disabled={isDisabled}>
           Зарегистрироваться
         </button>
       </form>
