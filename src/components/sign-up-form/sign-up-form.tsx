@@ -2,10 +2,6 @@ import {FormEvent, useEffect, useState} from 'react';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {TUserRegistration} from '../../types/user';
 import {
-  AVATAR_IMAGE_HEIGHT,
-  AVATAR_IMAGE_SIZE,
-  AVATAR_IMAGE_TYPES,
-  AVATAR_IMAGE_WIDTH,
   ErrorMessage,
   SuccessMessage,
   VALID_EMAIL_PATTERN,
@@ -19,6 +15,7 @@ import {RequestStatus} from '../../services/api/const';
 import {toast} from 'react-toastify';
 import {registerUser} from '../../store/user/api-actions';
 import {setRegistrationStatus} from '../../store/user/slice';
+import {validateImageFile} from '../../utils/utils';
 
 function SignUpForm() {
   const [isValueValid, setIsValueValid] = useState({name: true, email: true, password: true, avatar: true});
@@ -68,31 +65,11 @@ function SignUpForm() {
       return;
     }
 
-    if (formData.avatar?.name) {
-      const fileName = formData.avatar.name.toLowerCase();
+    if (formData.avatar?.name && !validateImageFile(formData.avatar)) {
+      setErrorMessage(ErrorMessage.Avatar);
+      setIsValueValid({name: true, email: true, password: true, avatar: false});
 
-      const validImageType = AVATAR_IMAGE_TYPES.some((fileType) => fileName.endsWith(fileType));
-      const validImageSize = formData.avatar.size <= AVATAR_IMAGE_SIZE;
-
-      const image = new Image();
-
-      image.onload = () => {
-        const validImageDimension =
-          image.naturalWidth <= AVATAR_IMAGE_WIDTH && image.naturalHeight <= AVATAR_IMAGE_HEIGHT;
-
-        const validImage = validImageType && validImageSize && validImageDimension;
-
-        if (!validImage) {
-          setErrorMessage(ErrorMessage.Avatar);
-          setIsValueValid({name: true, email: true, password: true, avatar: false});
-
-          return;
-        }
-
-        URL.revokeObjectURL(image.src);
-      };
-
-      image.src = URL.createObjectURL(formData.avatar);
+      return;
     }
 
     dispatch(registerUser(formData));
