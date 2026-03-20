@@ -67,6 +67,19 @@ export const ProductTypeName: Record<string, string> = {
   [ProductType.BrandMuffin]: 'Фирменный маффин'
 };
 
+export enum SuccessMessage {
+  Registration = 'Вы успешно зарегистрировались на сайте'
+}
+
+export enum ErrorMessage {
+  Avatar = 'Некорректный размер или разрешение изображения',
+  Email = 'Некорректный адрес электронной почты',
+  Login = 'Произошла ошибка авторизации',
+  Name = 'Имя должно содержать хотя бы одну букву',
+  Password = 'Пароль должен содержать минимум одну букву и одну цифру',
+  Registration = 'Произошла ошибка регистрации'
+}
+
 export const Shops: TShopLocation = {
   FIRST_SHOP: {
     name: 'Кондитерская 1',
@@ -112,3 +125,16 @@ export const STARS_COUNT = 5;
 export const DESCRIPTION_MAX_LENGTH = 140;
 
 export const RATING_LOW = 3;
+
+export const AVATAR_IMAGE_TYPES = ['jpg', 'jpeg', 'png'];
+
+export const AVATAR_IMAGE_SIZE = 1048576;
+
+export const AVATAR_IMAGE_WIDTH = 100, AVATAR_IMAGE_HEIGHT = 100;
+
+export const VALID_NAME_PATTERN = /^[A-Za-zА-яЁё]{1,}$/;
+
+export const VALID_EMAIL_PATTERN = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+export const VALID_PASSWORD_PATTERN = /^(?=.*[a-zA-Z])(?=.*\d)(?=.+$)/;
+

@@ -3,5 +3,6 @@ export enum StoreSlice {
   Product = 'product',
   Products = 'products',
   Reviews = 'reviews',
-  SiteProcess = 'siteProcess'
+  SiteProcess = 'siteProcess',
+  User = 'user'
 }

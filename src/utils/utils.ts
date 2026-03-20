@@ -1,9 +1,7 @@
-import {TFilterByCategoryProducts, TFilterByTypeProducts, TFilterReviews} from '../types/filter';
+import {TFilterReviews} from '../types/filter';
 import {TReview, TReviews} from '../types/review';
-import {ProductCategory, ProductType, RATING_LOW} from '../const';
+import {AVATAR_IMAGE_SIZE, AVATAR_IMAGE_TYPES, RATING_LOW} from '../const';
 import {TSortReviews} from '../types/sorting';
-import {TProducts} from '../types/product';
-
 
 export const shuffleArray = <T>(array: T[]): T[] => {
   const shuffled = [...array];
@@ -38,38 +36,11 @@ export const SortReviewsByDate: TSortReviews = {
   Descending: (a: TReview, b: TReview) => Date.parse(b.isoDate) - Date.parse(a.isoDate)
 };
 
-export const FilterProductsByCategory: TFilterByCategoryProducts = {
-  [ProductCategory.Bisque]: (products: TProducts) =>
-    products.filter((product) => product.category === ProductCategory.Bisque as string),
-  [ProductCategory.Cheesecake]: (products: TProducts) => products.filter((product) =>
-    product.category === ProductCategory.Cheesecake as string),
-  [ProductCategory.Shortbread]: (products: TProducts) => products.filter((product) =>
-    product.category === ProductCategory.Shortbread as string),
-  [ProductCategory.Dessert]: (products: TProducts) => products.filter((product) =>
-    product.category === ProductCategory.Dessert as string)
-};
+export const validateImageFile = (avatar: File) => {
+  const fileName = avatar.name.toLowerCase();
 
-export const FilterProductsByType: TFilterByTypeProducts = {
-  [ProductType.BrandMuffin]: (products) =>
-    products.filter((product) => product.type === ProductType.BrandMuffin as string),
-  [ProductType.Tart]: (products) =>
-    products.filter((product) => product.type === ProductType.Tart as string),
-  [ProductType.ChocolateMuffin]: (products) =>
-    products.filter((product) => product.type === ProductType.ChocolateMuffin as string),
-  [ProductType.NewYork]: (products) =>
-    products.filter((product) => product.type === ProductType.NewYork as string),
-  [ProductType.Lemon]: (products) =>
-    products.filter((product) => product.type === ProductType.Lemon as string),
-  [ProductType.BasketCake]: (products) =>
-    products.filter((product) => product.type === ProductType.BasketCake as string),
-  [ProductType.FunnelCake]: (products) =>
-    products.filter((product) => product.type === ProductType.FunnelCake as string),
-  [ProductType.HoneyCake]: (products) =>
-    products.filter((product) => product.type === ProductType.HoneyCake as string),
-  [ProductType.Vegetarian]: (products) =>
-    products.filter((product) => product.type === ProductType.Vegetarian as string),
-  [ProductType.Chocolate]: (products) =>
-    products.filter((product) => product.type === ProductType.Chocolate as string),
-  [ProductType.Vanilla]: (products) =>
-    products.filter((product) => product.type === ProductType.Vanilla as string)
+  const validImageType = AVATAR_IMAGE_TYPES.some((fileType) => fileName.endsWith(fileType));
+  const validImageSize = avatar.size <= AVATAR_IMAGE_SIZE;
+
+  return validImageType && validImageSize;
 };

@@ -4,7 +4,11 @@ import App from './components/app/app';
 import {Provider} from 'react-redux';
 import store from './store';
 import {fetchProducts} from './store/products/api-actions';
+import {fetchUserStatus} from './store/user/api-actions';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+store.dispatch(fetchUserStatus());
 store.dispatch(fetchProducts());
 
 const root = ReactDOM.createRoot(
@@ -14,6 +18,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      <ToastContainer />
       <App />
     </Provider>
   </React.StrictMode>

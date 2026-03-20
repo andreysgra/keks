@@ -1,11 +1,21 @@
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
+import {useAppSelector} from '../../hooks/use-app-selector';
+import {getIsAuthorized} from '../../store/user/selectors';
+import {useAppDispatch} from '../../hooks/use-app-dispatch';
+import {logoutUser} from '../../store/user/api-actions';
 
-type UserNavigationProps = {
-  isAuthorized: boolean;
-}
+function UserNavigation() {
+  const isAuthorized = useAppSelector(getIsAuthorized);
 
-function UserNavigation({isAuthorized}: UserNavigationProps) {
+  const dispatch = useAppDispatch();
+
+  const handleLogoutClick = () => {
+    if (isAuthorized) {
+      dispatch(logoutUser());
+    }
+  };
+
   return (
     <div className="header__buttons">
       {isAuthorized ? (
@@ -20,7 +30,7 @@ function UserNavigation({isAuthorized}: UserNavigationProps) {
           </Link>
           <div className="header__buttons-authorized">
             <div className="header__btn">
-              <Link className="btn btn--second" to={AppRoute.Root}>
+              <Link className="btn btn--second" to={AppRoute.Root} onClick={handleLogoutClick}>
                 Выйти
               </Link>
             </div>

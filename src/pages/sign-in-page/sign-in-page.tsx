@@ -1,3 +1,7 @@
+import SignInForm from '../../components/sign-in-form/sign-in-form';
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../const';
+
 function SignInPage() {
   return (
     <div className="wrapper">
@@ -17,46 +21,12 @@ function SignInPage() {
           <div className="login-page__content">
             <div className="login-page__inner">
               <h1 className="login-page__title">Вход</h1>
-              <div className="login-page__form">
-                <form action="#" method="post" autoComplete="off">
-                  <div className="login-page__fields">
-                    <div className="custom-input login-page__field">
-                      <label>
-                        <span className="custom-input__label">
-                      Введите вашу почту
-                        </span>
-                        <input
-                          type="email"
-                          name="user-mail-1"
-                          placeholder="Почта"
-                          required
-                        />
-                      </label>
-                    </div>
-                    <div className="custom-input login-page__field">
-                      <label>
-                        <span className="custom-input__label">
-                      Введите ваш пароль
-                        </span>
-                        <input
-                          type="password"
-                          name="user-password-1"
-                          placeholder="Пароль"
-                          required
-                        />
-                      </label>
-                    </div>
-                  </div>
-                  <button className="btn login-page__btn btn--large" type="submit">
-                    Войти
-                  </button>
-                </form>
-              </div>
+              <SignInForm />
               <p className="login-page__text-wrap">
                 Ещё не зарегистрированы?{' '}
-                <a className="login-page__link" href="register-page.html">
+                <Link className="login-page__link" to={AppRoute.SignUp}>
                   Создайте
-                </a>{' '}
+                </Link>{' '}
                 аккаунт прямо сейчас.
               </p>
             </div>
