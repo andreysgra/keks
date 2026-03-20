@@ -4,5 +4,6 @@ export enum ApiRoute {
   Logout = '/users/logout',
   Products = '/products',
   Registration = '/users/registration',
-  Reviews = '/reviews'
+  Reviews = '/reviews',
+  Upload = '/users/upload'
 }
