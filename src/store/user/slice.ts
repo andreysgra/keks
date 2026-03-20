@@ -15,7 +15,11 @@ const initialState: TUserState = {
 const userSlice = createSlice({
   name: StoreSlice.User,
   initialState,
-  reducers: {},
+  reducers: {
+    setRegistrationStatus: (state, action: PayloadAction<RequestStatus>) => {
+      state.registrationStatus = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUserStatus.fulfilled, (state, action: PayloadAction<TUser>) => {
@@ -55,5 +59,7 @@ const userSlice = createSlice({
       });
   }
 });
+
+export const {setRegistrationStatus} = userSlice.actions;
 
 export default userSlice;

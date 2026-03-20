@@ -10,4 +10,4 @@ export type TUserRegistration = Pick<TUser, 'name' | 'email'> & {
   avatar?: File;
 }
 
-export type TUserAuth = Omit<TUserRegistration, 'name'>
+export type TUserAuth = Omit<TUserRegistration, 'name' | 'avatar'>

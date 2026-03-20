@@ -2,9 +2,15 @@ import {FormEvent, useEffect, useState} from 'react';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {TUserRegistration} from '../../types/user';
 import {
-  AVATAR_IMAGE_HEIGHT, AVATAR_IMAGE_SIZE, AVATAR_IMAGE_TYPES, AVATAR_IMAGE_WIDTH,
+  AVATAR_IMAGE_HEIGHT,
+  AVATAR_IMAGE_SIZE,
+  AVATAR_IMAGE_TYPES,
+  AVATAR_IMAGE_WIDTH,
   ErrorMessage,
-  VALID_EMAIL_PATTERN, VALID_NAME_PATTERN, VALID_PASSWORD_PATTERN
+  SuccessMessage,
+  VALID_EMAIL_PATTERN,
+  VALID_NAME_PATTERN,
+  VALID_PASSWORD_PATTERN
 } from '../../const';
 import classNames from 'classnames';
 import {useAppSelector} from '../../hooks/use-app-selector';
@@ -12,6 +18,7 @@ import {getRegistrationStatus} from '../../store/user/selectors';
 import {RequestStatus} from '../../services/api/const';
 import {toast} from 'react-toastify';
 import {registerUser} from '../../store/user/api-actions';
+import {setRegistrationStatus} from '../../store/user/slice';
 
 function SignUpForm() {
   const [isValueValid, setIsValueValid] = useState({name: true, email: true, password: true, avatar: true});
@@ -24,8 +31,13 @@ function SignUpForm() {
   const isDisabled = registrationStatus === RequestStatus.Pending;
 
   useEffect(() => {
+    dispatch(setRegistrationStatus(RequestStatus.Idle));
+
+    if (registrationStatus === RequestStatus.Success) {
+      toast.success(SuccessMessage.Registration);
+    }
+
     if (registrationStatus === RequestStatus.Error) {
-      toast.dismiss();
       toast.error(ErrorMessage.Registration);
     }
   }, [registrationStatus, dispatch]);
@@ -73,14 +85,14 @@ function SignUpForm() {
         if (!validImage) {
           setErrorMessage(ErrorMessage.Avatar);
           setIsValueValid({name: true, email: true, password: true, avatar: false});
+
+          return;
         }
 
         URL.revokeObjectURL(image.src);
       };
 
       image.src = URL.createObjectURL(formData.avatar);
-
-      return;
     }
 
     dispatch(registerUser(formData));

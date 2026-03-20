@@ -67,6 +67,10 @@ export const ProductTypeName: Record<string, string> = {
   [ProductType.BrandMuffin]: 'Фирменный маффин'
 };
 
+export enum SuccessMessage {
+  Registration = 'Вы успешно зарегистрировались на сайте'
+}
+
 export enum ErrorMessage {
   Avatar = 'Некорректный размер или разрешение изображения',
   Email = 'Некорректный адрес электронной почты',
