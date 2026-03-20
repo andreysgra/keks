@@ -1,6 +1,6 @@
 import {TFilterReviews} from '../types/filter';
 import {TReview, TReviews} from '../types/review';
-import {AVATAR_IMAGE_HEIGHT, AVATAR_IMAGE_SIZE, AVATAR_IMAGE_TYPES, AVATAR_IMAGE_WIDTH, RATING_LOW} from '../const';
+import {RATING_LOW} from '../const';
 import {TSortReviews} from '../types/sorting';
 
 export const shuffleArray = <T>(array: T[]): T[] => {
@@ -34,23 +34,4 @@ export const FilterReviewsByRating: TFilterReviews = {
 export const SortReviewsByDate: TSortReviews = {
   Ascending: (a: TReview, b: TReview) => Date.parse(a.isoDate) - Date.parse(b.isoDate),
   Descending: (a: TReview, b: TReview) => Date.parse(b.isoDate) - Date.parse(a.isoDate)
-};
-
-export const validateAvatarFile = (avatar: File) => {
-  const fileName = avatar.name.toLowerCase();
-
-  const validImageType = AVATAR_IMAGE_TYPES.some((fileType) => fileName.endsWith(fileType));
-  const validImageSize = avatar.size <= AVATAR_IMAGE_SIZE;
-  let validFileDimension = false;
-
-  const img = new Image();
-
-  img.onload = () => {
-    validFileDimension = img.naturalWidth <= AVATAR_IMAGE_WIDTH && img.naturalHeight <= AVATAR_IMAGE_HEIGHT;
-    URL.revokeObjectURL(img.src);
-  };
-
-  img.src = URL.createObjectURL(avatar);
-
-  return validImageType && validImageSize && validFileDimension;
 };

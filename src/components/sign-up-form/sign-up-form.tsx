@@ -1,14 +1,17 @@
 import {FormEvent, useEffect, useState} from 'react';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
-import {registerUser} from '../../store/user/api-actions';
 import {TUserRegistration} from '../../types/user';
-import {ErrorMessage, VALID_EMAIL_PATTERN, VALID_NAME_PATTERN, VALID_PASSWORD_PATTERN} from '../../const';
+import {
+  AVATAR_IMAGE_HEIGHT, AVATAR_IMAGE_SIZE, AVATAR_IMAGE_TYPES, AVATAR_IMAGE_WIDTH,
+  ErrorMessage,
+  VALID_EMAIL_PATTERN, VALID_NAME_PATTERN, VALID_PASSWORD_PATTERN
+} from '../../const';
 import classNames from 'classnames';
-import {validateAvatarFile} from '../../utils/utils';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {getRegistrationStatus} from '../../store/user/selectors';
 import {RequestStatus} from '../../services/api/const';
 import {toast} from 'react-toastify';
+import {registerUser} from '../../store/user/api-actions';
 
 function SignUpForm() {
   const [isValueValid, setIsValueValid] = useState({name: true, email: true, password: true, avatar: true});
@@ -53,9 +56,29 @@ function SignUpForm() {
       return;
     }
 
-    if (formData.avatar?.name && !validateAvatarFile(formData.avatar)) {
-      setErrorMessage(ErrorMessage.Avatar);
-      setIsValueValid({name: true, email: true, password: true, avatar: false});
+    if (formData.avatar?.name) {
+      const fileName = formData.avatar.name.toLowerCase();
+
+      const validImageType = AVATAR_IMAGE_TYPES.some((fileType) => fileName.endsWith(fileType));
+      const validImageSize = formData.avatar.size <= AVATAR_IMAGE_SIZE;
+
+      const image = new Image();
+
+      image.onload = () => {
+        const validImageDimension =
+          image.naturalWidth <= AVATAR_IMAGE_WIDTH && image.naturalHeight <= AVATAR_IMAGE_HEIGHT;
+
+        const validImage = validImageType && validImageSize && validImageDimension;
+
+        if (!validImage) {
+          setErrorMessage(ErrorMessage.Avatar);
+          setIsValueValid({name: true, email: true, password: true, avatar: false});
+        }
+
+        URL.revokeObjectURL(image.src);
+      };
+
+      image.src = URL.createObjectURL(formData.avatar);
 
       return;
     }
@@ -65,6 +88,7 @@ function SignUpForm() {
 
   const handleFormChange = ()=> {
     setIsValueValid({name: true, email: true, password: true, avatar: true});
+    setErrorMessage('');
   };
 
   return (
