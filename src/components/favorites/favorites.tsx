@@ -5,6 +5,7 @@ import {useEffect} from 'react';
 import {fetchFavorites} from '../../store/favorites/api-actions';
 import CatalogList from '../catalog-list/catalog-list';
 import Loader from '../loader/loader';
+import FavoritesEmpty from '../favorites-empty/favorites-empty';
 
 function Favorites() {
   const products = useAppSelector(getFavorites);
@@ -18,6 +19,10 @@ function Favorites() {
 
   if (isFavoritesLoading) {
     return <Loader />;
+  }
+
+  if (products.length === 0) {
+    return <FavoritesEmpty />;
   }
 
   return (
