@@ -11,3 +11,10 @@ export const getIsFavoritesLoading = (state: State)=>
 
 export const getIsFavoritesFailed = (state: State)=>
   state[storeSlice].loadingStatus === RequestStatus.Error;
+
+export const getIsFavoriteAdding = (state: State)=>
+  state[storeSlice].addingStatus === RequestStatus.Pending;
+
+export const getIsFavoriteFailed = (state: State) =>
+  state[storeSlice].addingStatus === RequestStatus.Error;
+
