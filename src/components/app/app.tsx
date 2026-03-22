@@ -9,8 +9,23 @@ import SignUpPage from '../../pages/sign-up-page/sign-up-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 import {AuthorizationStatus} from '../../services/api/const';
+import {getIsAuthorized} from '../../store/user/selectors';
+import {useAppSelector} from '../../hooks/use-app-selector';
+import {useAppDispatch} from '../../hooks/use-app-dispatch';
+import {useEffect} from 'react';
+import {fetchFavorites} from '../../store/favorites/api-actions';
 
 function App() {
+  const isAuthorized = useAppSelector(getIsAuthorized);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (isAuthorized) {
+      dispatch(fetchFavorites());
+    }
+  }, [isAuthorized, dispatch]);
+
   return (
     <BrowserRouter>
       <Routes>
