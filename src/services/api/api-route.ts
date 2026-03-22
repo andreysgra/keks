@@ -1,5 +1,6 @@
 export enum ApiRoute {
   Categories = '/categories',
+  Favorites = '/favorites',
   Login = '/users/login',
   Logout = '/users/logout',
   Products = '/products',

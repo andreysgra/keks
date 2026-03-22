@@ -4,9 +4,11 @@ import {useAppSelector} from '../../hooks/use-app-selector';
 import {getIsAuthorized} from '../../store/user/selectors';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {logoutUser} from '../../store/user/api-actions';
+import {getFavorites} from '../../store/favorites/selectors';
 
 function UserNavigation() {
   const isAuthorized = useAppSelector(getIsAuthorized);
+  const favoritesCount = useAppSelector(getFavorites).length;
 
   const dispatch = useAppDispatch();
 
@@ -23,9 +25,10 @@ function UserNavigation() {
           <Link className="header__favourite" to={AppRoute.Favorites}>
             <span className="header__favourite-icon">
               <svg width={33} height={29} aria-hidden="true">
-                <use xlinkHref="#icon-favourite" />
+                <use xlinkHref="#icon-favourite"/>
               </svg>
             </span>
+            {favoritesCount > 0 && <span className="header__favourite-number">{favoritesCount}</span>}
             <span className="visually-hidden">Избранное</span>
           </Link>
           <div className="header__buttons-authorized">
