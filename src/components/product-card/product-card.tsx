@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import {TProduct} from '../../types/product';
 import {AppRoute, RouteParam} from '../../const';
 import {getFormattedNumber} from '../../utils/utils';
+import FavoritesButton from '../favorites-button/favorites-button';
 
 type ProductCardProps = {
   product: TProduct;
@@ -16,8 +17,7 @@ function ProductCard({product, isBig}: ProductCardProps) {
     price,
     previewImage,
     previewImageWebp,
-    isNew,
-    isFavorite
+    isNew
   } = product;
 
   const link = AppRoute.Product.replace(RouteParam.Id, id);
@@ -42,12 +42,7 @@ function ProductCard({product, isBig}: ProductCardProps) {
         </div>
         {isNew && <span className="card-item__label">Новинка</span>}
       </Link>
-      <button className={classNames('card-item__favorites', {'card-item__favorites--active': isFavorite})}>
-        <span className="visually-hidden">Добавить в избранное</span>
-        <svg width={51} height={41} aria-hidden="true">
-          <use xlinkHref="#icon-like" />
-        </svg>
-      </button>
+      <FavoritesButton id={id} />
       {isBig && <span className="card-item__price">{getFormattedNumber(price)} p</span>}
       <Link className="card-item__link" to={link}>
         <h3 className="card-item__title">
