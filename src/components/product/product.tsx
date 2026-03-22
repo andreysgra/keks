@@ -4,11 +4,11 @@ import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {useEffect, useState} from 'react';
 import {fetchProduct} from '../../store/product/api-actions';
 import Loader from '../loader/loader';
-import classNames from 'classnames';
 import {getFormattedNumber} from '../../utils/utils';
 import Rating from '../rating/rating';
 import {DESCRIPTION_MAX_LENGTH} from '../../const';
 import DetailsButton from '../details-button/details-button';
+import FavoritesButton from '../favorites-button/favorites-button';
 
 type ProductProps = {
   id: string;
@@ -48,7 +48,6 @@ function Product({id}: ProductProps) {
     previewImageWebp,
     description,
     isNew,
-    isFavorite,
     weight,
     images,
     rating,
@@ -96,14 +95,7 @@ function Product({id}: ProductProps) {
                 {isDescriptionLong && <DetailsButton onClick={handleDetailsButtonClick} />}
               </div>
               <div className="item-details__button-wrapper">
-                <button className={classNames('item-details__like-button',
-                  {'item-details__like-button--active': isFavorite})}
-                >
-                  <svg width={45} height={37} aria-hidden="true">
-                    <use xlinkHref="#icon-like" />
-                  </svg>
-                  <span className="visually-hidden">Понравилось</span>
-                </button>
+                <FavoritesButton id={id} />
                 <button className="btn btn--second" type="button">
                   Оставить отзыв
                 </button>
