@@ -68,6 +68,7 @@ export const ProductTypeName: Record<string, string> = {
 };
 
 export enum SuccessMessage {
+  ReviewSubmit = 'Спасибо, за ваш отзыв',
   Registration = 'Вы успешно зарегистрировались на сайте'
 }
 
@@ -76,8 +77,11 @@ export enum ErrorMessage {
   Email = 'Некорректный адрес электронной почты',
   Login = 'Произошла ошибка авторизации',
   Name = 'Имя должно содержать хотя бы одну букву',
+  NegativeReview = 'Опишите недостатки',
   Password = 'Пароль должен содержать минимум одну букву и одну цифру',
-  Registration = 'Произошла ошибка регистрации'
+  PositiveReview = 'Опишите достоинства',
+  Registration = 'Произошла ошибка регистрации',
+  ReviewSubmit = 'Произошла ошибка, попробуйте отправить ещё раз'
 }
 
 export const Shops: TShopLocation = {
@@ -125,6 +129,8 @@ export const STARS_COUNT = 5;
 export const DESCRIPTION_MAX_LENGTH = 140;
 
 export const RATING_LOW = 3;
+
+export const REVIEW_MAX_LENGTH = 500;
 
 export const AVATAR_IMAGE_TYPES = ['jpg', 'jpeg', 'png'];
 

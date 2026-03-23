@@ -19,7 +19,7 @@ function ProductPage() {
         <h1 className="visually-hidden">Карточка товара</h1>
         <BackLink />
         <Product id={id} />
-        {isReviewFormShown && <ReviewForm />}
+        {isReviewFormShown && <ReviewForm id={id}/>}
         <ReviewsContent id={id} />
       </main>
       <Footer />

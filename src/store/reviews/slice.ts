@@ -15,7 +15,11 @@ const initialState: TReviewsState = {
 const reviewsSlice = createSlice({
   name: StoreSlice.Products,
   initialState,
-  reducers: {},
+  reducers: {
+    setReviewStatus: (state, action: PayloadAction<RequestStatus>) => {
+      state.submitStatus = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchReviewLast.fulfilled, (state, action: PayloadAction<TReview>) => {
@@ -52,5 +56,7 @@ const reviewsSlice = createSlice({
       });
   }
 });
+
+export const {setReviewStatus} = reviewsSlice.actions;
 
 export default reviewsSlice;

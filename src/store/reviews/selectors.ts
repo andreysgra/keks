@@ -27,3 +27,6 @@ export const getIsReviewSubmitting = (state: State)=>
 
 export const getIsReviewSubmitFailed = (state: State)=>
   state[storeSlice].submitStatus === RequestStatus.Error;
+
+export const getIsReviewSubmitSuccess = (state: State) =>
+  state[storeSlice].submitStatus === RequestStatus.Success;
