@@ -18,9 +18,8 @@ export const shuffleArray = <T>(array: T[]): T[] => {
 export const getDate = (date: string): string =>
   new Date(date).toLocaleDateString('en-CA');
 
-export const getTime = (date: string): string =>
-  new Date(date).toLocaleTimeString('ru-RU', {hour: '2-digit', minute:'2-digit'})
-    .replace(':', '.');
+export const getDayMonth = (date: string): string =>
+  new Date(date).toLocaleDateString('ru-RU', {day: '2-digit', month: '2-digit'});
 
 export const getFormattedNumber = (digits: number): string =>
   new Intl.NumberFormat('ru-RU').format(digits);
