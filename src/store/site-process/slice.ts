@@ -11,7 +11,7 @@ const initialState: TSiteProcessState = {
   reviewsCount: REVIEWS_PER_LOAD,
   shopType: Object.keys(Shops)[0],
   reviewsFilterOption: 'All',
-  reviewsSortOption: 'Ascending',
+  reviewsSortOption: 'Descending',
   reviewFormShown: false
 };
 
