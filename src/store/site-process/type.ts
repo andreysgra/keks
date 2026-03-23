@@ -8,4 +8,5 @@ export type TSiteProcessState = {
   shopType: TShopType;
   reviewsFilterOption: TFilterOption;
   reviewsSortOption: TSortOption;
+  reviewFormShown: boolean;
 }

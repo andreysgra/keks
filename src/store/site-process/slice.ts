@@ -11,7 +11,8 @@ const initialState: TSiteProcessState = {
   reviewsCount: REVIEWS_PER_LOAD,
   shopType: Object.keys(Shops)[0],
   reviewsFilterOption: 'All',
-  reviewsSortOption: 'Ascending'
+  reviewsSortOption: 'Ascending',
+  reviewFormShown: false
 };
 
 const siteProcessSlice = createSlice({
@@ -32,6 +33,9 @@ const siteProcessSlice = createSlice({
     },
     setReviewsSortOption: (state, action: PayloadAction<TSortOption>) => {
       state.reviewsSortOption = action.payload;
+    },
+    setReviewFormShown: (state, action: PayloadAction<boolean>) => {
+      state.reviewFormShown = action.payload;
     }
   }
 });
@@ -41,7 +45,8 @@ export const {
   setReviewsCount,
   setShopType,
   setReviewsFilterOption,
-  setReviewsSortOption
+  setReviewsSortOption,
+  setReviewFormShown
 } = siteProcessSlice.actions;
 
 export default siteProcessSlice;

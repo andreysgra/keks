@@ -22,3 +22,5 @@ export const getFilteredReviews = createSelector(
     [...FilterReviewsByRating[filterOption](reviews)]
       .sort(SortReviewsByDate[sortOption])
 );
+
+export const getReviewFormShown = (state: State)=> state[storeSlice].reviewFormShown;
