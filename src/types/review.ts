@@ -11,4 +11,4 @@ export type TReview = {
 
 export type TReviews = TReview[];
 
-export type TReviewContent = Pick<TReview, 'positive' | 'negative' | 'rating'>
+export type TReviewContent = Omit<TReview, 'isoDate' | 'user'>

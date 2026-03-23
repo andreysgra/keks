@@ -21,3 +21,9 @@ export const getIsReviewsLoading = (state: State) =>
 
 export const getIsReviewsFailed = (state: State) =>
   state[storeSlice].loadingStatus === RequestStatus.Error;
+
+export const getIsReviewSubmitting = (state: State)=>
+  state[storeSlice].submitStatus === RequestStatus.Pending;
+
+export const getIsReviewSubmitFailed = (state: State)=>
+  state[storeSlice].submitStatus === RequestStatus.Error;
