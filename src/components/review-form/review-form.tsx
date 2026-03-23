@@ -1,4 +1,13 @@
+import {STARS_COUNT} from '../../const';
+import RatingStar from '../rating-star/rating-star';
+import {ChangeEvent, useState} from 'react';
+
 function ReviewForm() {
+  const [rating, setRating] = useState<number>(0);
+
+  const handleRadioChange = (evt: ChangeEvent<HTMLInputElement>) =>
+    setRating(Number(evt.target.value));
+
   return (
     <section className="review-form">
       <div className="container">
@@ -33,66 +42,14 @@ function ReviewForm() {
               <div className="review-form__submit-wrapper">
                 <div className="review-form__rating-wrapper">
                   <div className="input-star-rating">
-                    <input
-                      type="radio"
-                      name="input-star-rating"
-                      id="input-star-rating-5"
-                      defaultValue={5}
-                      aria-label="5 звезд"
-                    />
-                    <label htmlFor="input-star-rating-5">
-                      <svg width={40} height={40} aria-hidden="true">
-                        <use xlinkHref="#icon-star" />
-                      </svg>
-                    </label>
-                    <input
-                      type="radio"
-                      name="input-star-rating"
-                      id="input-star-rating-4"
-                      defaultValue={4}
-                      aria-label="4 звезды"
-                    />
-                    <label htmlFor="input-star-rating-4">
-                      <svg width={40} height={40} aria-hidden="true">
-                        <use xlinkHref="#icon-star" />
-                      </svg>
-                    </label>
-                    <input
-                      type="radio"
-                      name="input-star-rating"
-                      id="input-star-rating-3"
-                      defaultValue={3}
-                      aria-label="3 звезды"
-                    />
-                    <label htmlFor="input-star-rating-3">
-                      <svg width={40} height={40} aria-hidden="true">
-                        <use xlinkHref="#icon-star" />
-                      </svg>
-                    </label>
-                    <input
-                      type="radio"
-                      name="input-star-rating"
-                      id="input-star-rating-2"
-                      defaultValue={2}
-                      aria-label="2 звезды"
-                    />
-                    <label htmlFor="input-star-rating-2">
-                      <svg width={40} height={40} aria-hidden="true">
-                        <use xlinkHref="#icon-star" />
-                      </svg>
-                    </label>
-                    <input
-                      type="radio"
-                      name="input-star-rating"
-                      id="input-star-rating-1"
-                      defaultValue={1}
-                      aria-label="1 звезда"
-                    />
-                    <label htmlFor="input-star-rating-1">
-                      <svg width={40} height={40} aria-hidden="true">
-                        <use xlinkHref="#icon-star" />
-                      </svg>
-                    </label>
+                    {Array.from({length: STARS_COUNT}, (_, i: number) => (
+                      <RatingStar
+                        key={`star-${STARS_COUNT - i}`}
+                        value={STARS_COUNT - i}
+                        rating={rating}
+                        onChange={handleRadioChange}
+                      />
+                    ))}
                   </div>
                 </div>
                 <div className="review-form__button-wrapper">
