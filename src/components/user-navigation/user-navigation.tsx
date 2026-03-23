@@ -5,6 +5,7 @@ import {getIsAuthorized} from '../../store/user/selectors';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {logoutUser} from '../../store/user/api-actions';
 import {getFavorites} from '../../store/favorites/selectors';
+import {setReviewFormShown} from '../../store/site-process/slice';
 
 function UserNavigation() {
   const isAuthorized = useAppSelector(getIsAuthorized);
@@ -15,6 +16,7 @@ function UserNavigation() {
   const handleLogoutClick = () => {
     if (isAuthorized) {
       dispatch(logoutUser());
+      dispatch(setReviewFormShown(false));
     }
   };
 

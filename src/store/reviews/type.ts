@@ -5,4 +5,5 @@ export type TReviewsState = {
   reviews: TReviews;
   reviewLast: TReview | null;
   loadingStatus: RequestStatus;
+  submitStatus: RequestStatus;
 }

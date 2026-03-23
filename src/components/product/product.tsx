@@ -6,9 +6,14 @@ import {fetchProduct} from '../../store/product/api-actions';
 import Loader from '../loader/loader';
 import {getFormattedNumber} from '../../utils/utils';
 import Rating from '../rating/rating';
-import {DESCRIPTION_MAX_LENGTH} from '../../const';
+import {AppRoute, DESCRIPTION_MAX_LENGTH} from '../../const';
 import DetailsButton from '../details-button/details-button';
 import FavoritesButton from '../favorites-button/favorites-button';
+import {setReviewFormShown} from '../../store/site-process/slice';
+import {getReviewFormShown} from '../../store/site-process/selectors';
+import {MouseEvent} from 'react';
+import {getIsAuthorized} from '../../store/user/selectors';
+import {useNavigate} from 'react-router-dom';
 
 type ProductProps = {
   id: string;
@@ -18,10 +23,14 @@ function Product({id}: ProductProps) {
   const product = useAppSelector(getProduct);
   const isProductLoading = useAppSelector(getIsProductLoading);
   const isProductFailed = useAppSelector(getIsProductFailed);
+  const isReviewFormShown = useAppSelector(getReviewFormShown);
+  const isAuthorized = useAppSelector(getIsAuthorized);
 
   const [isDescriptionLong, setDescriptionLong] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchProduct(id));
@@ -60,6 +69,22 @@ function Product({id}: ProductProps) {
     setDescriptionLong((prevState) => !prevState);
   };
 
+  const handleReviewButtonClick = (evt: MouseEvent<HTMLButtonElement>) => {
+    if (!isAuthorized) {
+      navigate(AppRoute.SignIn);
+
+      return;
+    }
+
+    dispatch(setReviewFormShown(!isReviewFormShown));
+
+    if (isReviewFormShown) {
+      evt.currentTarget.textContent = 'Оставить отзыв';
+    } else {
+      evt.currentTarget.textContent = 'Отменить отзыв';
+    }
+  };
+
   return (
     <section className="item-details">
       <div className="container">
@@ -96,7 +121,7 @@ function Product({id}: ProductProps) {
               </div>
               <div className="item-details__button-wrapper">
                 <FavoritesButton id={id} />
-                <button className="btn btn--second" type="button">
+                <button className="btn btn--second" type="button" onClick={handleReviewButtonClick}>
                   Оставить отзыв
                 </button>
               </div>
