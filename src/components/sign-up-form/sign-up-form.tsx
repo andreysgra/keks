@@ -2,8 +2,7 @@ import {ChangeEvent, FormEvent, useEffect, useState} from 'react';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {TUserRegistration} from '../../types/user';
 import {
-  AVATAR_IMAGE_HEIGHT,
-  AVATAR_IMAGE_WIDTH,
+  AvatarImage,
   ErrorMessage,
   SuccessMessage,
   VALID_EMAIL_PATTERN,
@@ -47,8 +46,8 @@ function SignUpForm() {
 
     const formData = Object.fromEntries(new FormData(evt.currentTarget)) as TUserRegistration;
 
-    const validImageDimension = imageDimension.width <= AVATAR_IMAGE_WIDTH ||
-      imageDimension.height <= AVATAR_IMAGE_HEIGHT;
+    const validImageDimension = imageDimension.width <= AvatarImage.Width ||
+      imageDimension.height <= AvatarImage.Height;
 
     if (!formData.name.match(VALID_NAME_PATTERN)) {
       setErrorMessage(ErrorMessage.Name);

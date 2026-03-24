@@ -47,6 +47,23 @@ export enum ProductType {
   BrandMuffin = 'brand-muffin'
 }
 
+export enum SuccessMessage {
+  ReviewSubmit = 'Спасибо, за ваш отзыв',
+  Registration = 'Вы успешно зарегистрировались на сайте'
+}
+
+export enum ErrorMessage {
+  Avatar = 'Файл не более 100x100, размер менее 1 мб',
+  Email = 'Некорректный адрес электронной почты',
+  Login = 'Произошла ошибка авторизации',
+  Name = 'Имя должно содержать хотя бы одну букву',
+  NegativeReview = 'Опишите недостатки',
+  Password = 'Пароль должен содержать минимум одну букву и одну цифру',
+  PositiveReview = 'Опишите достоинства',
+  Registration = 'Произошла ошибка регистрации',
+  ReviewSubmit = 'Произошла ошибка, попробуйте отправить ещё раз'
+}
+
 export const ProductCategoryName: Record<string, string> = {
   [ProductCategory.Bisque]: 'Бисквит',
   [ProductCategory.Cheesecake]: 'Чизкейк',
@@ -67,23 +84,6 @@ export const ProductTypeName: Record<string, string> = {
   [ProductType.ChocolateMuffin]: 'Шоколадный маффин',
   [ProductType.BrandMuffin]: 'Фирменный маффин'
 };
-
-export enum SuccessMessage {
-  ReviewSubmit = 'Спасибо, за ваш отзыв',
-  Registration = 'Вы успешно зарегистрировались на сайте'
-}
-
-export enum ErrorMessage {
-  Avatar = 'Файл не более 100x100, размер менее 1 мб',
-  Email = 'Некорректный адрес электронной почты',
-  Login = 'Произошла ошибка авторизации',
-  Name = 'Имя должно содержать хотя бы одну букву',
-  NegativeReview = 'Опишите недостатки',
-  Password = 'Пароль должен содержать минимум одну букву и одну цифру',
-  PositiveReview = 'Опишите достоинства',
-  Registration = 'Произошла ошибка регистрации',
-  ReviewSubmit = 'Произошла ошибка, попробуйте отправить ещё раз'
-}
 
 export const Shops: TShopLocation = {
   FIRST_SHOP: {
@@ -119,6 +119,11 @@ export const MapIcon = {
   Anchor: [13, 12] as [number, number]
 } as const;
 
+export const AvatarImage = {
+  Width: 100,
+  Height: 100
+} as const;
+
 export const PRODUCTS_PER_LOAD = 6;
 
 export const REVIEWS_PER_LOAD = 2;
@@ -137,9 +142,7 @@ export const AVATAR_IMAGE_TYPES = ['jpg', 'jpeg', 'png'];
 
 export const AVATAR_IMAGE_SIZE = 1048576;
 
-export const AVATAR_IMAGE_WIDTH = 100, AVATAR_IMAGE_HEIGHT = 100;
-
-export const VALID_NAME_PATTERN = /^[A-Za-zА-яЁё]{1,}$/;
+export const VALID_NAME_PATTERN = /^[A-Za-zА-яЁё]+$/;
 
 export const VALID_EMAIL_PATTERN = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 

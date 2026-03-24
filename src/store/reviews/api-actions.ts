@@ -8,7 +8,7 @@ import {AppDispatch} from '../../types/state';
 export const fetchReviewLast = createAsyncThunk<TReview, undefined, {extra: AxiosInstance}>(
   `${StoreSlice.Reviews}/fetch-last`,
   async (_, {extra: api}) => {
-    const {data} = await api.get<TReview>(`${ApiRoute.Reviews}/getLast`);
+    const {data} = await api.get<TReview>(ApiRoute.ReviewLast);
 
     return data;
   }
