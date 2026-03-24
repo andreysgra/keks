@@ -13,6 +13,7 @@ import {setReviewFormShown} from '../../store/site-process/slice';
 import {getReviewFormShown} from '../../store/site-process/selectors';
 import {getIsAuthorized} from '../../store/user/selectors';
 import {useNavigate} from 'react-router-dom';
+import classNames from 'classnames';
 
 type ProductProps = {
   id: string;
@@ -79,7 +80,7 @@ function Product({id}: ProductProps) {
   };
 
   return (
-    <section className="item-details">
+    <section className={classNames('item-details', {'item-details--form-open': isReviewFormShown})}>
       <div className="container">
         <div className="item-details__wrapper">
           <div className="item-details__top-wrapper">
