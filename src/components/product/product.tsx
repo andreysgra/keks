@@ -114,7 +114,7 @@ function Product({id}: ProductProps) {
                 {isDescriptionLong && <DetailsButton onClick={handleDetailsButtonClick} />}
               </div>
               <div className="item-details__button-wrapper">
-                <FavoritesButton id={id} />
+                <FavoritesButton id={id} isSmall />
                 <button className="btn btn--second" type="button" onClick={handleReviewButtonClick}>
                   {isReviewFormShown ? 'Отменить отзыв' : 'Оставить отзыв'}
                 </button>
