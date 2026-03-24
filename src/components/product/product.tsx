@@ -11,7 +11,6 @@ import DetailsButton from '../details-button/details-button';
 import FavoritesButton from '../favorites-button/favorites-button';
 import {setReviewFormShown} from '../../store/site-process/slice';
 import {getReviewFormShown} from '../../store/site-process/selectors';
-import {MouseEvent} from 'react';
 import {getIsAuthorized} from '../../store/user/selectors';
 import {useNavigate} from 'react-router-dom';
 
@@ -69,7 +68,7 @@ function Product({id}: ProductProps) {
     setDescriptionLong((prevState) => !prevState);
   };
 
-  const handleReviewButtonClick = (evt: MouseEvent<HTMLButtonElement>) => {
+  const handleReviewButtonClick = () => {
     if (!isAuthorized) {
       navigate(AppRoute.SignIn);
 
@@ -77,12 +76,6 @@ function Product({id}: ProductProps) {
     }
 
     dispatch(setReviewFormShown(!isReviewFormShown));
-
-    if (isReviewFormShown) {
-      evt.currentTarget.textContent = 'Оставить отзыв';
-    } else {
-      evt.currentTarget.textContent = 'Отменить отзыв';
-    }
   };
 
   return (
@@ -122,7 +115,7 @@ function Product({id}: ProductProps) {
               <div className="item-details__button-wrapper">
                 <FavoritesButton id={id} />
                 <button className="btn btn--second" type="button" onClick={handleReviewButtonClick}>
-                  Оставить отзыв
+                  {isReviewFormShown ? 'Отменить отзыв' : 'Оставить отзыв'}
                 </button>
               </div>
             </div>
