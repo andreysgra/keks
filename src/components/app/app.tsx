@@ -16,6 +16,7 @@ import {useEffect} from 'react';
 import {fetchFavorites} from '../../store/favorites/api-actions';
 import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../services/browser-history';
+import ErrorPage from '../../pages/error-page/error-page';
 
 function App() {
   const isAuthorized = useAppSelector(getIsAuthorized);
@@ -33,29 +34,29 @@ function App() {
       <Routes>
         <Route
           index
-          element={<MainPage/>}
+          element={<MainPage />}
         />
         <Route
           path={AppRoute.Catalog}
-          element={<CatalogPage/>}
+          element={<CatalogPage />}
         />
         <Route
           path={AppRoute.Favorites}
           element={
             <PrivateRoute restrictedFor={AuthorizationStatus.NoAuth} redirectedTo={AppRoute.SignIn}>
-              <FavoritesPage/>
+              <FavoritesPage />
             </PrivateRoute>
           }
         />
         <Route
           path={AppRoute.Product}
-          element={<ProductPage/>}
+          element={<ProductPage />}
         />
         <Route
           path={AppRoute.SignIn}
           element={
             <PrivateRoute restrictedFor={AuthorizationStatus.Auth} redirectedTo={AppRoute.Root}>
-              <SignInPage/>
+              <SignInPage />
             </PrivateRoute>
           }
         />
@@ -63,13 +64,17 @@ function App() {
           path={AppRoute.SignUp}
           element={
             <PrivateRoute restrictedFor={AuthorizationStatus.Auth} redirectedTo={AppRoute.Root}>
-              <SignUpPage/>
+              <SignUpPage />
             </PrivateRoute>
           }
         />
         <Route
+          path={AppRoute.Error}
+          element={<ErrorPage />}
+        />
+        <Route
           path="*"
-          element={<NotFoundPage/>}
+          element={<NotFoundPage />}
         />
       </Routes>
     </HistoryRouter>

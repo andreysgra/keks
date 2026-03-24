@@ -3,6 +3,7 @@ import {TShopLocation} from './types/shop';
 export enum AppRoute {
   Root = '/',
   Catalog = '/catalog',
+  Error = '/error',
   Favorites = '/favorites',
   NotFound = '/404',
   Product = '/product/:id',

@@ -5,20 +5,24 @@ import {getFilteredProducts} from '../../store/category/selectors';
 import {getProductsCount} from '../../store/site-process/selectors';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {setProductsCount} from '../../store/site-process/slice';
-import {PRODUCTS_PER_LOAD} from '../../const';
+import {AppRoute, PRODUCTS_PER_LOAD} from '../../const';
 import NoFilteredProducts from '../no-filtered-products/no-filtered-products';
-import {getIsProductsLoading} from '../../store/products/selectors';
+import {getIsProductsFailed, getIsProductsLoading} from '../../store/products/selectors';
 import Loader from '../loader/loader';
 import {useEffect} from 'react';
 import {fetchProducts} from '../../store/products/api-actions';
 import {setActiveCategory} from '../../store/category/slice';
+import {useNavigate} from 'react-router-dom';
 
 function Catalog() {
   const products = useAppSelector(getFilteredProducts);
   const displayedProducts = useAppSelector(getProductsCount);
   const isProductsLoading = useAppSelector(getIsProductsLoading);
+  const isProductsFailed = useAppSelector(getIsProductsFailed);
 
   const dispatch = useAppDispatch();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -27,6 +31,10 @@ function Catalog() {
 
   if (isProductsLoading) {
     return <Loader />;
+  }
+
+  if (isProductsFailed) {
+    navigate(AppRoute.Error);
   }
 
   if (products.length === 0) {
