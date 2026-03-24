@@ -1,0 +1,30 @@
+.favorites-page--error {
+  flex-grow: 1;
+}
+
+.error-favorites {
+  padding: 100px 0;
+  flex-grow: 1;
+}
+
+.error-favorites__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error-favorites__title {
+  text-align: center;
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: .1em;
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 124px;
+}
+
+.error-favorites__button {
+  width: 310px;
+  padding-top: 21px;
+  padding-bottom: 21px;
+}
