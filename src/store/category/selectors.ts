@@ -9,15 +9,14 @@ const storeSlice = StoreSlice.Categories;
 
 export const getCategories = (state: State) => state[storeSlice].categories;
 
-export const getIsCategoriesLoading = (state: State) =>
-  state[storeSlice].loadingStatus === RequestStatus.Pending;
-
 export const getIsCategoriesFailed = (state: State) =>
   state[storeSlice].loadingStatus === RequestStatus.Error;
 
-export const getActiveCategory = (state: State) => state[storeSlice].activeCategory;
+export const getActiveCategory = (state: State) =>
+  state[storeSlice].activeCategory;
 
-export const getActiveTypes = (state: State)=> state[storeSlice].activeTypes;
+export const getActiveTypes = (state: State)=>
+  state[storeSlice].activeTypes;
 
 export const getFilteredProducts = createSelector(
   [getProducts, getActiveCategory, getActiveTypes],
