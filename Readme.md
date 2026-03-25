@@ -6,6 +6,8 @@
 
 Программирование: [Андрей Грачев](https://github.com/andreysgra/)
 
+[Демо проекта](https://keks-sweetshop.vercel.app)
+
 [Техническое задание](Specification.md)
 
 ## Используемый стек
