@@ -22,10 +22,12 @@ type ReviewFormProps = {
 
 function ReviewForm({id}: ReviewFormProps) {
   const [rating, setRating] = useState<number>(0);
-  const [positiveReview, setPositiveReview] = useState<string>('');
-  const [negativeReview, setNegativeReview] = useState<string>('');
-  const [isValueValid, setIsValueValid] = useState({positiveReview: true, negativeReview: true});
+  const [positive, setPositive] = useState<string>('');
+  const [negative, setNegative] = useState<string>('');
+  const [positiveMessage, setPositiveMessage] = useState('');
+  const [negativeMessage, setNegativeMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isValueValid, setIsValueValid] = useState({positive: true, negative: true});
 
   const dispatch = useAppDispatch();
 
@@ -40,8 +42,10 @@ function ReviewForm({id}: ReviewFormProps) {
       toast.success(SuccessMessage.ReviewSubmit);
 
       setRating(0);
-      setPositiveReview('');
-      setNegativeReview('');
+      setPositive('');
+      setNegative('');
+      setPositiveMessage('');
+      setNegativeMessage('');
     }
 
     if (isReviewSubmitFailed) {
@@ -49,44 +53,54 @@ function ReviewForm({id}: ReviewFormProps) {
     }
   }, [isSubmitSuccess, isReviewSubmitFailed, dispatch]);
 
+  const remainReviewLength = (length: number, cb: (message: string) => void) => {
+    if (length > 0) {
+      cb(`Осталось ${REVIEW_MAX_LENGTH - length} символов`);
+    } else {
+      cb('');
+    }
+  };
+
   const handleRadioChange = (evt: ChangeEvent<HTMLInputElement>) =>
     setRating(Number(evt.target.value));
 
   const handlePositiveInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    setPositiveReview(evt.target.value);
+    remainReviewLength(evt.target.value.length, setPositiveMessage);
+    setPositive(evt.target.value);
   };
 
   const handleNegativeInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    setNegativeReview(evt.target.value);
+    remainReviewLength(evt.target.value.length, setNegativeMessage);
+    setNegative(evt.target.value);
   };
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>)=> {
     evt.preventDefault();
 
-    if (rating > RATING_LOW && positiveReview.length === 0) {
+    if (rating > RATING_LOW && positive.length === 0) {
       setErrorMessage(ErrorMessage.PositiveReview);
-      setIsValueValid({positiveReview: false, negativeReview: true});
+      setIsValueValid({positive: false, negative: true});
 
       return;
     }
 
-    if (rating <= RATING_LOW && negativeReview.length === 0) {
+    if (rating <= RATING_LOW && negative.length === 0) {
       setErrorMessage(ErrorMessage.NegativeReview);
-      setIsValueValid({positiveReview: true, negativeReview: false});
+      setIsValueValid({positive: true, negative: false});
 
       return;
     }
 
-    dispatch(postReview({id, positive: positiveReview, negative: negativeReview, rating} as TReviewContent));
+    dispatch(postReview({id, positive, negative, rating} as TReviewContent));
   };
 
   const handleFormChange = ()=> {
-    setIsValueValid({positiveReview: true, negativeReview: true});
+    setIsValueValid({positive: true, negative: true});
     setErrorMessage('');
   };
 
   const isDisabled =
-    isSubmitting || !rating || positiveReview.length > REVIEW_MAX_LENGTH || negativeReview.length > REVIEW_MAX_LENGTH;
+    isSubmitting || !rating || positive.length > REVIEW_MAX_LENGTH || negative.length > REVIEW_MAX_LENGTH;
 
   return (
     <section className="review-form">
@@ -102,39 +116,31 @@ function ReviewForm({id}: ReviewFormProps) {
               noValidate
             >
               <div className="review-form__inputs-wrapper">
-                <div className={classNames('custom-input', {'is-invalid': !isValueValid.positiveReview})}>
+                <div className={classNames('custom-input', {'is-invalid': !isValueValid.positive})}>
                   <label>
-                    <span className={classNames(
-                      {'custom-input__label': isValueValid.positiveReview},
-                      {'custom-input__message': !isValueValid.positiveReview}
-                    )}
-                    >
-                      {isValueValid.positiveReview ? 'Достоинства' : errorMessage}
+                    <span className="custom-input__message">
+                      {isValueValid.positive ? positiveMessage : errorMessage}
                     </span>
                     <input
                       type="text"
                       name="positive"
                       placeholder="Достоинства"
-                      value={positiveReview}
+                      value={positive}
                       required
                       onChange={handlePositiveInputChange}
                     />
                   </label>
                 </div>
-                <div className={classNames('custom-input', {'is-invalid': !isValueValid.negativeReview})}>
+                <div className={classNames('custom-input', {'is-invalid': !isValueValid.negative})}>
                   <label>
-                    <span className={classNames(
-                      {'custom-input__label': isValueValid.negativeReview},
-                      {'custom-input__message': !isValueValid.negativeReview}
-                    )}
-                    >
-                      {isValueValid.negativeReview ? 'Недостатки' : errorMessage}
+                    <span className="custom-input__message">
+                      {isValueValid.negative ? negativeMessage : errorMessage}
                     </span>
                     <input
                       type="text"
                       name="negative"
                       placeholder="Недостатки"
-                      value={negativeReview}
+                      value={negative}
                       required
                       onChange={handleNegativeInputChange}
                     />

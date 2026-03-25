@@ -1,6 +1,6 @@
 import {TReview} from '../../types/review';
 import classNames from 'classnames';
-import {getDate, getTime} from '../../utils/utils';
+import {getDate, getDayMonth} from '../../utils/utils';
 import Rating from '../rating/rating';
 
 type ReviewProps = {
@@ -21,7 +21,7 @@ function Review({review, isBordered}: ReviewProps) {
     <div className="review">
       <div className={classNames('review__inner-wrapper', {'review__inner-wrapper--border': isBordered})}>
         <time className="review__date" dateTime={getDate(isoDate)}>
-          {getTime(isoDate)}
+          {getDayMonth(isoDate)}
         </time>
         <span className="review__author">Уважаемый(-ая) {user.name}</span>
         <Rating rating={rating} />

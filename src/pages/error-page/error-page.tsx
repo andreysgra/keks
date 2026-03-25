@@ -16,7 +16,7 @@ function ErrorPage() {
             </p>
             <div className="error-loading__image">
               <img
-                src="img/svg/cake-load.svg"
+                src="/img/svg/cake-load.svg"
                 width={157}
                 height={184}
                 alt="Кекс."

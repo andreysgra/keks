@@ -11,7 +11,7 @@ function SignUpPage() {
             <div className="register-page__img-wrap">
               <img
                 className="register-page__img"
-                src="img/svg/hero-keks.svg"
+                src="/img/svg/hero-keks.svg"
                 width={727}
                 height={569}
                 alt="Картинка кота."

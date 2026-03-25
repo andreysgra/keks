@@ -8,9 +8,10 @@ import {getIsAuthorized} from '../../store/user/selectors';
 
 type FavoritesButtonProps = {
   id: TProduct['id'];
+  isSmall?: boolean;
 }
 
-function FavoritesButton({id}: FavoritesButtonProps) {
+function FavoritesButton({id, isSmall}: FavoritesButtonProps) {
   const isFavoriteAdding = useAppSelector(getIsFavoriteAdding);
   const isFavorite = useAppSelector(getFavorites).some((favorite: TProduct) => favorite.id === id);
   const isAuthorized = useAppSelector(getIsAuthorized);
@@ -27,12 +28,18 @@ function FavoritesButton({id}: FavoritesButtonProps) {
 
   return (
     <button
-      className={classNames('card-item__favorites', {'card-item__favorites--active': isFavorite && isAuthorized})}
+      className={classNames(
+        isSmall ? 'item-details__like-button' : 'card-item__favorites',
+        {
+          'item-details__like-button--active': isFavorite && isAuthorized && isSmall,
+          'card-item__favorites--active': isFavorite && isAuthorized && !isSmall
+        }
+      )}
       disabled={isFavoriteAdding}
       onClick={handleButtonClick}
     >
       <span className="visually-hidden">Добавить в избранное</span>
-      <svg width={51} height={41} aria-hidden="true">
+      <svg width={isSmall ? 45 : 51} height={isSmall ? 37 : 41} aria-hidden="true">
         <use xlinkHref="#icon-like" />
       </svg>
     </button>

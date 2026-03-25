@@ -11,10 +11,10 @@ function SignInPage() {
             <div className="login-page__img-wrap">
               <img
                 className="login-page__img"
-                src="img/svg/hero-keks.svg"
+                src="/img/svg/hero-keks.svg"
                 width={727}
                 height={569}
-                alt="Картика кота."
+                alt="Картинка кота."
               />
             </div>
           </div>

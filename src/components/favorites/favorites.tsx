@@ -1,5 +1,5 @@
 import {useAppSelector} from '../../hooks/use-app-selector';
-import {getFavorites, getIsFavoritesLoading} from '../../store/favorites/selectors';
+import {getFavorites, getIsFavoritesFailed, getIsFavoritesLoading} from '../../store/favorites/selectors';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {useEffect} from 'react';
 import {deleteFavorite, fetchFavorites} from '../../store/favorites/api-actions';
@@ -9,10 +9,12 @@ import FavoritesEmpty from '../favorites-empty/favorites-empty';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import {getFormattedNumber, getPlural} from '../../utils/utils';
+import ErrorFavorites from '../error-favorites/error-favorites';
 
 function Favorites() {
   const products = useAppSelector(getFavorites);
   const isFavoritesLoading = useAppSelector(getIsFavoritesLoading);
+  const isFavoritesFailed = useAppSelector(getIsFavoritesFailed);
 
   const dispatch = useAppDispatch();
 
@@ -22,6 +24,10 @@ function Favorites() {
 
   if (isFavoritesLoading) {
     return <Loader />;
+  }
+
+  if (isFavoritesFailed) {
+    return <ErrorFavorites />;
   }
 
   if (products.length === 0) {

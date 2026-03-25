@@ -1,7 +1,8 @@
-import {FormEvent, useEffect, useState} from 'react';
+import {ChangeEvent, FormEvent, useEffect, useState} from 'react';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {TUserRegistration} from '../../types/user';
 import {
+  AvatarImage,
   ErrorMessage,
   SuccessMessage,
   VALID_EMAIL_PATTERN,
@@ -20,6 +21,7 @@ import {validateImageFile} from '../../utils/utils';
 function SignUpForm() {
   const [isValueValid, setIsValueValid] = useState({name: true, email: true, password: true, avatar: true});
   const [errorMessage, setErrorMessage] = useState('');
+  const [imageDimension, setImageDimension] = useState({width: 0, height: 0});
 
   const dispatch = useAppDispatch();
 
@@ -44,6 +46,9 @@ function SignUpForm() {
 
     const formData = Object.fromEntries(new FormData(evt.currentTarget)) as TUserRegistration;
 
+    const validImageDimension = imageDimension.width <= AvatarImage.Width ||
+      imageDimension.height <= AvatarImage.Height;
+
     if (!formData.name.match(VALID_NAME_PATTERN)) {
       setErrorMessage(ErrorMessage.Name);
       setIsValueValid({name: false, email: true, password: true, avatar: true});
@@ -65,7 +70,7 @@ function SignUpForm() {
       return;
     }
 
-    if (formData.avatar?.name && !validateImageFile(formData.avatar)) {
+    if (formData.avatar?.name && !validateImageFile(formData.avatar) || !validImageDimension) {
       setErrorMessage(ErrorMessage.Avatar);
       setIsValueValid({name: true, email: true, password: true, avatar: false});
 
@@ -80,9 +85,32 @@ function SignUpForm() {
     setErrorMessage('');
   };
 
+  const handleFileChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    const file = evt.target.files?.[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const image = new Image();
+
+        image.onload = () => {
+          setImageDimension({
+            width: image.naturalWidth,
+            height: image.naturalHeight
+          });
+        };
+
+        image.src = URL.createObjectURL(file);
+      };
+
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div className="register-page__form">
-      <form action="#" method="post" autoComplete="off" onSubmit={handleFormSubmit} noValidate>
+      <form action="#" method="post" autoComplete="off" onSubmit={handleFormSubmit} onChange={handleFormChange} noValidate>
         <div className="register-page__fields">
           <div className={classNames('custom-input register-page__field', {'is-invalid': !isValueValid.name})}>
             <label>
@@ -98,7 +126,6 @@ function SignUpForm() {
                 name="name"
                 placeholder="Имя"
                 required
-                onChange={handleFormChange}
               />
             </label>
           </div>
@@ -116,7 +143,6 @@ function SignUpForm() {
                 name="email"
                 placeholder="Почта"
                 required
-                onChange={handleFormChange}
               />
             </label>
           </div>
@@ -134,7 +160,6 @@ function SignUpForm() {
                 name="password"
                 placeholder="Пароль"
                 required
-                onChange={handleFormChange}
               />
             </label>
           </div>
@@ -152,7 +177,7 @@ function SignUpForm() {
                 name="avatar"
                 data-text="Аватар"
                 accept="image/jpeg, image/png"
-                onChange={handleFormChange}
+                onChange={handleFileChange}
               />
             </label>
           </div>

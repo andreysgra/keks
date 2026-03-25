@@ -19,5 +19,3 @@ export type TDetailedProduct = TProduct & {
   rating: number;
   reviewCount: number;
 }
-
-export type TFavoriteProducts = TDetailedProduct[]

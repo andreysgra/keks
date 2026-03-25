@@ -11,9 +11,9 @@ import DetailsButton from '../details-button/details-button';
 import FavoritesButton from '../favorites-button/favorites-button';
 import {setReviewFormShown} from '../../store/site-process/slice';
 import {getReviewFormShown} from '../../store/site-process/selectors';
-import {MouseEvent} from 'react';
 import {getIsAuthorized} from '../../store/user/selectors';
 import {useNavigate} from 'react-router-dom';
+import classNames from 'classnames';
 
 type ProductProps = {
   id: string;
@@ -69,7 +69,7 @@ function Product({id}: ProductProps) {
     setDescriptionLong((prevState) => !prevState);
   };
 
-  const handleReviewButtonClick = (evt: MouseEvent<HTMLButtonElement>) => {
+  const handleReviewButtonClick = () => {
     if (!isAuthorized) {
       navigate(AppRoute.SignIn);
 
@@ -77,16 +77,10 @@ function Product({id}: ProductProps) {
     }
 
     dispatch(setReviewFormShown(!isReviewFormShown));
-
-    if (isReviewFormShown) {
-      evt.currentTarget.textContent = 'Оставить отзыв';
-    } else {
-      evt.currentTarget.textContent = 'Отменить отзыв';
-    }
   };
 
   return (
-    <section className="item-details">
+    <section className={classNames('item-details', {'item-details--form-open': isReviewFormShown})}>
       <div className="container">
         <div className="item-details__wrapper">
           <div className="item-details__top-wrapper">
@@ -120,9 +114,9 @@ function Product({id}: ProductProps) {
                 {isDescriptionLong && <DetailsButton onClick={handleDetailsButtonClick} />}
               </div>
               <div className="item-details__button-wrapper">
-                <FavoritesButton id={id} />
+                <FavoritesButton id={id} isSmall />
                 <button className="btn btn--second" type="button" onClick={handleReviewButtonClick}>
-                  Оставить отзыв
+                  {isReviewFormShown ? 'Отменить отзыв' : 'Оставить отзыв'}
                 </button>
               </div>
             </div>

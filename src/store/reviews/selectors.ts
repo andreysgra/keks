@@ -6,9 +6,6 @@ const storeSlice = StoreSlice.Reviews;
 
 export const getReviewsLast = (state: State) => state[storeSlice].reviewLast;
 
-export const getIsReviewLastLoading = (state: State) =>
-  state[storeSlice].loadingStatus === RequestStatus.Pending;
-
 export const getIsReviewLastFailed = (state: State) =>
   state[storeSlice].loadingStatus === RequestStatus.Error;
 
