@@ -7,23 +7,30 @@ import ReviewsContent from '../../components/reviews-content/reviews-content';
 import ReviewForm from '../../components/review-form/review-form';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {getReviewFormShown} from '../../store/site-process/selectors';
+import {PageTitle} from '../../const';
+import {Helmet} from 'react-helmet-async';
 
 function ProductPage() {
   const id = useParams().id as string;
   const isReviewFormShown = useAppSelector(getReviewFormShown);
 
   return (
-    <div className="wrapper">
-      <Header />
-      <main>
-        <h1 className="visually-hidden">Карточка товара</h1>
-        <BackLink />
-        <Product id={id} />
-        {isReviewFormShown && <ReviewForm id={id}/>}
-        <ReviewsContent id={id} />
-      </main>
-      <Footer />
-    </div>
+    <>
+      <Helmet>
+        <title>{PageTitle.Product}</title>
+      </Helmet>
+      <div className="wrapper">
+        <Header/>
+        <main>
+          <h1 className="visually-hidden">Карточка товара</h1>
+          <BackLink/>
+          <Product id={id}/>
+          {isReviewFormShown && <ReviewForm id={id}/>}
+          <ReviewsContent id={id}/>
+        </main>
+        <Footer/>
+      </div>
+    </>
   );
 }
 

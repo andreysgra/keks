@@ -17,6 +17,7 @@ import {fetchFavorites} from '../../store/favorites/api-actions';
 import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../services/browser-history';
 import ErrorPage from '../../pages/error-page/error-page';
+import {HelmetProvider} from 'react-helmet-async';
 
 function App() {
   const isAuthorized = useAppSelector(getIsAuthorized);
@@ -30,54 +31,56 @@ function App() {
   }, [isAuthorized, dispatch]);
 
   return (
-    <HistoryRouter history={browserHistory}>
-      <Routes>
-        <Route
-          index
-          element={<MainPage />}
-        />
-        <Route
-          path={AppRoute.Catalog}
-          element={<CatalogPage />}
-        />
-        <Route
-          path={AppRoute.Favorites}
-          element={
-            <PrivateRoute restrictedFor={AuthorizationStatus.NoAuth} redirectedTo={AppRoute.SignIn}>
-              <FavoritesPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path={AppRoute.Product}
-          element={<ProductPage />}
-        />
-        <Route
-          path={AppRoute.SignIn}
-          element={
-            <PrivateRoute restrictedFor={AuthorizationStatus.Auth} redirectedTo={AppRoute.Root}>
-              <SignInPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path={AppRoute.SignUp}
-          element={
-            <PrivateRoute restrictedFor={AuthorizationStatus.Auth} redirectedTo={AppRoute.Root}>
-              <SignUpPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path={AppRoute.Error}
-          element={<ErrorPage />}
-        />
-        <Route
-          path="*"
-          element={<NotFoundPage />}
-        />
-      </Routes>
-    </HistoryRouter>
+    <HelmetProvider>
+      <HistoryRouter history={browserHistory}>
+        <Routes>
+          <Route
+            index
+            element={<MainPage/>}
+          />
+          <Route
+            path={AppRoute.Catalog}
+            element={<CatalogPage/>}
+          />
+          <Route
+            path={AppRoute.Favorites}
+            element={
+              <PrivateRoute restrictedFor={AuthorizationStatus.NoAuth} redirectedTo={AppRoute.SignIn}>
+                <FavoritesPage/>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={AppRoute.Product}
+            element={<ProductPage/>}
+          />
+          <Route
+            path={AppRoute.SignIn}
+            element={
+              <PrivateRoute restrictedFor={AuthorizationStatus.Auth} redirectedTo={AppRoute.Root}>
+                <SignInPage/>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={AppRoute.SignUp}
+            element={
+              <PrivateRoute restrictedFor={AuthorizationStatus.Auth} redirectedTo={AppRoute.Root}>
+                <SignUpPage/>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={AppRoute.Error}
+            element={<ErrorPage/>}
+          />
+          <Route
+            path="*"
+            element={<NotFoundPage/>}
+          />
+        </Routes>
+      </HistoryRouter>
+    </HelmetProvider>
   );
 }
 

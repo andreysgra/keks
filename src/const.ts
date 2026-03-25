@@ -64,6 +64,17 @@ export enum ErrorMessage {
   ReviewSubmit = 'Произошла ошибка, попробуйте отправить ещё раз'
 }
 
+export enum PageTitle {
+  Catalog = 'Кондитерская Кекс - Каталог',
+  Error = 'Кондитерская Кекс - Ошибка загрузки страницы',
+  Favorites = 'Кондитерская Кекс - Избранное',
+  Main = 'Кондитерская Кекс - Главная',
+  NotFound = 'Кондитерская Кекс - 404',
+  Product = 'Кондитерская Кекс - Карточка товара',
+  SignIn = 'Кондитерская Кекс - Вход',
+  SignUp = 'Кондитерская Кекс - Регистрация'
+}
+
 export const ProductCategoryName: Record<string, string> = {
   [ProductCategory.Bisque]: 'Бисквит',
   [ProductCategory.Cheesecake]: 'Чизкейк',
